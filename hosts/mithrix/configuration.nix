@@ -1,7 +1,6 @@
 {
-  config,
+  inputs,
   lib,
-  pkgs,
   ...
 }: {
   imports = [
@@ -16,14 +15,12 @@
       configLocation = "~/nix-config#mithrix";
     };
     bootLoader.enable = true;
-    docker.enable = true;
+    docker.enable = false;
     shells.enable = true;
     sops = {
       enable = true;
       extraSopsFiles = [../../secrets/mithrix/secrets.yaml];
     };
-
-    wg-server.enable = false;
   };
 
   services.openssh = {

@@ -10,7 +10,7 @@
         "core"
         "git"
         "shells"
-	"sops"
+	      "sops"
       ];
     }
   ];
@@ -25,29 +25,6 @@
     podman.enable = true;
     stacks = {
       enable = true;
-       # adguard.enable = true;
-       # audiobookshelf.enable = true;
-       # calibre.enable = true;
-       # changedetection.enable = true;
-       # crowdsec.enable = true;
-       # dozzle.enable = true;
-       # dockdns.enable = true;
-       # filebrowser.enable = true;
-       # healthchecks.enable = true;
-       # homepage.enable = true;
-       # monitoring.enable = true;
-       # streaming.enable = true;
-       # stirling-pdf.enable = true;
-       # immich.enable = true;
-       # paperless.enable = true;
-       # wg-easy.enable = true;
-
-       uptime-kuma.enable = true;
-       skatcounter.enable = true;
-      traefik = {
-        enable = true;
-        domain = "elyth.xyz";
-      };
     };
   };
 }

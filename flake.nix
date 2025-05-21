@@ -22,44 +22,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    stylix = {
-      url = "github:danth/stylix/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-    };
-
-    walker = {
-      url = "github:abenz1267/walker";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let

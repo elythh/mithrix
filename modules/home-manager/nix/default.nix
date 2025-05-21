@@ -46,25 +46,4 @@ in {
   };
 
   home.packages = with pkgs; [nixd alejandra];
-  programs.vscode.userSettings = {
-    "[nix]" = {
-      "editor.defaultFormatter" = "jnoortheen.nix-ide";
-    };
-    "nix.serverPath" = "nixd";
-    "nix.enableLanguageServer" = true;
-    "nix.hiddenLanguageServerErrors" = [
-      "textDocument/formatting"
-      "textDocument/definition"
-    ];
-    "nix.serverSettings" = {
-      "nixd" = {
-        "nixpkgs" = {
-          "expr" = "import <nixpkgs>{}";
-        };
-        "formatting" = {
-          "command" = ["alejandra"];
-        };
-      };
-    };
-  };
 }
