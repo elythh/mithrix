@@ -5,7 +5,9 @@
 }: let
   cfg = config.tarow.stacks;
 in {
-  imports = lib.tarow.readSubdirs ./.;
+  imports =
+    lib.tarow.readSubdirs ./.
+    ++ [./extension.nix (lib.mkAliasOptionModule ["tarow" "containers"] ["services" "podman" "containers"])];
 
   options.tarow.stacks = {
     enable = lib.mkEnableOption "stacks";
@@ -36,18 +38,5 @@ in {
   };
   config = lib.mkIf cfg.enable {
     tarow.podman.enable = true;
-    # This is crucial to ensure the systemd services are (re)started on config change
-    systemd.user.startServices = "sd-switch";
-
-    services.podman.containers.calibre = {
-      image = "lscr.io/linuxserver/calibre-web";
-      environment = {
-        PUID = config.tarow.stacks.defaultUid;
-        PGID = config.tarow.stacks.defaultGid;
-        TZ = config.tarow.stacks.defaultTz;
-      };
-      ports = [ "40001:8083" ] ;
-    };
-
   };
 }

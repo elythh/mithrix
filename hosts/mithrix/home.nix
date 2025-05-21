@@ -25,6 +25,7 @@
     podman.enable = true;
     stacks = {
       enable = true;
+      calibre.enable = true;
     };
   };
 }
