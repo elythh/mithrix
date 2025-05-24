@@ -45,17 +45,6 @@ in
         # https://github.com/containers/podman/issues/24637
         dependsOn = ["user-wait-network-online"] ++ (map (sa: "${name}-${toString sa.port}.socket") config.socketActivation);
         extraConfig = {
-          # Theres some issues with healthchecks transient systemd service not being created. Disable for now
-          # https://github.com/containers/podman/issues/25034#issuecomment-2600582885
-          # Manually add systemd to PATH until PR is merged: https://github.com/nix-community/home-manager/pull/6659
-          Service.Environment = "PATH=${
-            builtins.concatStringsSep ":" [
-              "/run/wrappers/bin"
-              "/run/current-system/sw/bin"
-              "${pkgs.systemd}/bin"
-          ]}";
-
-
           Unit.Requires = config.dependsOn;
           Unit.After = config.dependsOn;
 

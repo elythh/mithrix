@@ -26,6 +26,12 @@
     stacks = {
       enable = true;
       calibre.enable = true;
+      paperless.enable = true;
+      immich.enable = true;
+      traefik = {
+          enable = true;
+          domain = "elyth.xyz";
+        };
     };
   };
 }

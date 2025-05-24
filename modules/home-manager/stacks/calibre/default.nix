@@ -23,8 +23,7 @@ in {
         TZ = config.tarow.stacks.defaultTz;
       };
       port = 8083;
-
-      stack = name;
+      traefik.name = name;
     };
 
     services.podman.containers."${name}-downloader" = let
@@ -37,27 +36,17 @@ in {
         FLASK_DEBUG = false;
         CLOUDFLARE_PROXY_URL = "http://cloudflarebypassforscraping:8000";
         INGEST_DIR = ingestDir;
-        BOOK_LANGUAGE = "en,de";
+        BOOK_LANGUAGE = "en,fr";
       };
       volumes = [
         "${storage}/ingest:${ingestDir}"
       ];
 
-      port = port;
-      stack = name;
-      homepage = {
-        category = "General";
-        name = "Calibre Downloader";
-        settings = {
-          description = "Ebook Library";
-          icon = "calibre-web";
-        };
-      };
+      ports = [ "8084:8084"];
     };
 
     services.podman.containers.cloudflarebypassforscraping = {
       image = "ghcr.io/sarperavci/cloudflarebypassforscraping:latest";
-      stack = name;
     };
   };
 }
