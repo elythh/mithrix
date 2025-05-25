@@ -44,7 +44,7 @@ in {
       environment = {
         FLASK_PORT = port;
         FLASK_DEBUG = false;
-        CLOUDFLARE_PROXY_URL = "http://cloudflarebypassforscraping:8000";
+        # CLOUDFLARE_PROXY_URL = "http://cloudflarebypassforscraping:8000";
         INGEST_DIR = ingestDir;
         BOOK_LANGUAGE = "en,de";
       };
@@ -65,9 +65,9 @@ in {
       };
     };
 
-    services.podman.containers.cloudflarebypassforscraping = {
-      image = "ghcr.io/sarperavci/cloudflarebypassforscraping:latest";
-      stack = name;
-    };
+    # services.podman.containers.cloudflarebypassforscraping = {
+    #   image = "ghcr.io/sarperavci/cloudflarebypassforscraping:latest";
+    #   stack = name;
+    # };
   };
 }

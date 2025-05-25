@@ -32,7 +32,7 @@
     };
   };
 
-  time.timeZone = "Europe/Berlin";
+  time.timeZone = "Europe/Europe";
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = lib.mkForce 0;
   networking.firewall.allowedUDPPorts = [53 80 443 51820];
   networking.firewall.allowedTCPPorts = [21 53 80 443 8888] ++ (lib.range 40000 40009);

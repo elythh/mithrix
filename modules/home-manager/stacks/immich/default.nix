@@ -44,6 +44,15 @@ in {
         port = 2283;
 
         stack = name;
+
+        homepage = {
+          category = "Media";
+          name = "Immich";
+          settings = {
+            description = "Self-hosted photo and video management";
+            icon = "immich";
+          };
+        };
       };
 
       ${redisName} = {

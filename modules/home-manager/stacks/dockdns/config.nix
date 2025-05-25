@@ -25,10 +25,8 @@ in ''
 
   domains:
     - name: "${domain}"
-      a: ${ip}
 
     - name: "*.${domain}"
-      a: ${ip}
 
     - name: "vpn.${domain}"
 ''
