@@ -35,7 +35,12 @@ in {
 
         dependsOn = [redisName dbName];
 
-        traefik.name = name;
+        traefik = {
+          name = name;
+          subDomain = "photo";
+          middlewares = ["public"];
+        };
+
         port = 2283;
 
         stack = name;

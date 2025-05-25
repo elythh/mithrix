@@ -26,6 +26,7 @@ in {
     services.podman = {
       enable = true;
       package = cfg.package;
+      autoUpdate.enable = true;
 
       settings = {
         containers.network.dns_bind_port = 1153;

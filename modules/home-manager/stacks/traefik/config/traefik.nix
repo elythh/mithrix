@@ -21,7 +21,7 @@
     insecureSkipVerify: true
 
   api:
-    dashboard: false
+    dashboard: true
 
   providers:
     docker:
@@ -48,13 +48,10 @@
       geoblock:
         moduleName: github.com/nscuro/traefik-plugin-geoblock
         version: v0.14.0
-      bouncer:
-        moduleName: github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
-        version: v1.4.2
 
   accessLog:
     format: json
 
   log:
-    level: WARN
+    level: INFO
 ''

@@ -17,6 +17,7 @@
     bootLoader.enable = true;
     docker.enable = false;
     shells.enable = true;
+    wg-server.enable = false;
     sops = {
       enable = true;
       extraSopsFiles = [../../secrets/mithrix/secrets.yaml];

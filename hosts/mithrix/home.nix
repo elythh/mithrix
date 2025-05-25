@@ -28,6 +28,10 @@
       calibre.enable = true;
       paperless.enable = true;
       immich.enable = true;
+      homepage.enable = true;
+      beszel.enable = true;
+      wg-easy.enable = true;
+      dockdns.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
