@@ -56,6 +56,7 @@ in {
         "${config.tarow.podman.socketLocation}:/var/run/docker.sock:ro"
         "${pkgs.writeText "traefik.yml" (import ./config/traefik.nix {inherit (cfg) domain;})}:/etc/traefik/traefik.yml:ro"
         "${./config/dynamic.yml}:/dynamic/config.yml"
+        "${./config/IP2LOCATION-LITE-DB1.IPV6.BIN}:/plugins/geoblock/IP2LOCATION-LITE-DB1.IPV6.BIN"
       ];
       labels = lib.mkForce {
         "traefik.enable" = "true";

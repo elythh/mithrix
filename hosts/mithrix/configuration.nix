@@ -34,9 +34,23 @@
 
   time.timeZone = "Europe/Europe";
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = lib.mkForce 0;
-  networking.firewall.allowedUDPPorts = [53 80 443 51820];
-  networking.firewall.allowedTCPPorts = [21 53 80 443 8888] ++ (lib.range 40000 40009);
-  networking.hostName = "mithrix";
+  networking = rec {
+    firewall = {
+      allowedUDPPorts = [53 80 443 51820];
+      allowedTCPPorts = [21 53 80 443 8888] ++ (lib.range 40000 40009);
+    };
+    hostName = "mithrix";
+    defaultGateway = "192.168.1.254";
+    nameservers = [defaultGateway];
+    interfaces.enp1s0 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.1.111";
+          prefixLength = 24;
+        }
+      ];
+    };
+  };
 
   services.prometheus.exporters.node = {
       enable = true;
