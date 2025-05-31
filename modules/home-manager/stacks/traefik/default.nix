@@ -64,8 +64,19 @@ in {
         "traefik.http.routers.api.rule" = ''Host(\`${name}.${cfg.domain}\`)'';
         "traefik.http.routers.api.middlewares" = "private-chain@file";
         "traefik.http.routers.api.service" = "api@internal";
+         "logging.alloy" = "true";
       };
       network = [cfg.network];
+      alloy.enable = true;
+      homepage = {
+        category = "General";
+        name = "Traefik";
+        settings = {
+          description = "Reverse Proxy";
+          href = "https://${name}.${cfg.domain}";
+          icon = "traefik";
+        };
+      };
     };
   };
 }

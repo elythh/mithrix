@@ -38,6 +38,7 @@
       streaming.enable = true;
       aiostreams.enable = true;
       free-game.enable = true;
+      monitoring.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
