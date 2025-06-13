@@ -57,6 +57,7 @@ in {
     services.podman.containers.${name} = {
       image = "ghcr.io/gethomepage/homepage:latest";
       volumes = [
+        "${./images}:/app/public/images"
         "${mediaStorage}:/mnt/hdd1:ro"
         "${yaml.generate "docker.yaml" cfg.docker}:/app/config/docker.yaml"
         "${yaml.generate "services.yaml" cfg.services}:/app/config/services.yaml"
@@ -82,6 +83,7 @@ in {
       docker.local.socket = "/var/run/docker.sock";
 
       settings.statusStyle = "dot";
+      settings.background = "/images/gruvbox.jpg";
 
       widgets = [
         {
