@@ -4,20 +4,18 @@
   ...
 }: let
   name = "aiostreams";
-  cfg = config.tarow.stacks.${name};
+  cfg = config.meadow.stacks.${name};
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
 in {
-  options.tarow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers.${name} = {
       image = "ghcr.io/viren070/aiostreams:latest";
-      extraConfig.Container = {
-        HealthCmd = "wget -qO- http://localhost:3000/health";
-        HealthInterval = "1m";
-        HealthTimeout = "10s";
-        HealthRetries = 5;
-        HealthStartPeriod = "10s";
-      };
+      environmentFile = [config.sops.secrets."aiostreams/env".path];
+        volumes = [
+          "${storage}/data:/app/data"
+        ];
 
       port = 3000;
       traefik.name = name;

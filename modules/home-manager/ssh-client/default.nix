@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.tarow.sshClient;
+  cfg = config.meadow.sshClient;
 in {
-  options.tarow.sshClient = {
+  options.meadow.sshClient = {
     enable = lib.options.mkEnableOption "SSH Client Config";
   };
   config = lib.mkIf cfg.enable {

@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.tarow.printing;
+  cfg = config.meadow.printing;
 in {
-  options.tarow.printing = {
+  options.meadow.printing = {
     enable = lib.options.mkEnableOption "Printing";
   };
 

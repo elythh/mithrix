@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.tarow.podman;
+  cfg = config.meadow.podman;
 in {
-  options.tarow.podman = with lib; {
+  options.meadow.podman = with lib; {
     enable = mkEnableOption "Podman";
     package = mkOption {
       type = types.package;
@@ -18,7 +18,7 @@ in {
     };
     socketLocation = lib.mkOption {
       type = lib.types.str;
-      default = "/run/user/${toString config.tarow.facts.uid}/podman/podman.sock";
+      default = "/run/user/${toString config.meadow.facts.uid}/podman/podman.sock";
       readOnly = true;
     };
   };

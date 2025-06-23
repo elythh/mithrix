@@ -3,8 +3,8 @@
   config,
   ...
 }: let
-  dockdnsEnabled = config.tarow.stacks.dockdns.enable;
-  traefikEnabled = config.tarow.stacks.traefik.enable;
+  dockdnsEnabled = config.meadow.stacks.dockdns.enable;
+  traefikEnabled = config.meadow.stacks.traefik.enable;
 in {
   # If a container has the public middleware, create a record for it
   options.services.podman.containers = lib.mkOption {

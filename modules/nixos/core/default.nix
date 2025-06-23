@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.core;
+  cfg = config.meadow.core;
 in {
-  options.tarow.core = {
+  options.meadow.core = {
     enable = lib.options.mkEnableOption "Core Programs and Configs";
     configLocation = lib.options.mkOption {
       type = lib.types.nullOr lib.types.str;

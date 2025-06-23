@@ -1,6 +1,6 @@
 config: let
-  domain = config.tarow.stacks.traefik.domain;
-  ip = config.tarow.facts.ip4Address;
+  domain = config.meadow.stacks.traefik.domain;
+  ip = config.meadow.facts.ip4Address;
 in ''
   interval: 300
   debounceTime: 10
@@ -29,4 +29,8 @@ in ''
     - name: "*.${domain}"
 
     - name: "vpn.${domain}"
+
+    - name: "lobby.${domain}"
+
+    - name: "voice.${domain}"
 ''

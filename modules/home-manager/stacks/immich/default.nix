@@ -9,12 +9,12 @@
   redisName = "${name}-redis";
   mlName = "${name}-machine-learning";
 
-  storage = "${config.tarow.stacks.storageBaseDir}/${name}";
-  mediaStorage = "${config.tarow.stacks.mediaStorageBaseDir}";
-  cfg = config.tarow.stacks.${name};
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
+  mediaStorage = "${config.meadow.stacks.mediaStorageBaseDir}";
+  cfg = config.meadow.stacks.${name};
 
   env = {
-    TZ = config.tarow.stacks.defaultTz;
+    TZ = config.meadow.stacks.defaultTz;
     DB_HOSTNAME = dbName;
     DB_USERNAME = "postgres";
     DB_PASSWORD = "1234";
@@ -23,7 +23,7 @@
     NODE_ENV = "production";
   };
 in {
-  options.tarow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers = {

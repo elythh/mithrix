@@ -5,9 +5,9 @@
   options,
   ...
 }: let
-  cfg = config.tarow.wg-server;
+  cfg = config.meadow.wg-server;
 in {
-  options.tarow.wg-server = with lib; {
+  options.meadow.wg-server = with lib; {
     enable = mkEnableOption "Wireguard Server";
     port = mkOption {
       type = types.port;

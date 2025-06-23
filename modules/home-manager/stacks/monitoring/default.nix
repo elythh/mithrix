@@ -5,13 +5,13 @@
   ...
 }: let
   stackName = "monitoring";
-  cfg = config.tarow.stacks.${stackName};
+  cfg = config.meadow.stacks.${stackName};
 
   grafanaName = "grafana";
   lokiName = "loki";
   prometheusName = "prometheus";
   alloyName = "alloy";
-  storage = "${config.tarow.stacks.storageBaseDir}/${stackName}";
+  storage = "${config.meadow.stacks.storageBaseDir}/${stackName}";
 
   lokiPort = 3100;
   lokiUrl = "http://${lokiName}:${toString lokiPort}";
@@ -24,7 +24,7 @@
 in {
   imports = [./extension.nix];
 
-  options.tarow.stacks.${stackName}.enable = lib.mkEnableOption stackName;
+  options.meadow.stacks.${stackName}.enable = lib.mkEnableOption stackName;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers = {
@@ -46,7 +46,7 @@ in {
         '';
       in {
         image = "docker.io/grafana/grafana:latest";
-        user = config.tarow.stacks.defaultUid;
+        user = config.meadow.stacks.defaultUid;
         volumes = [
           "${storage}/grafana/data:/var/lib/grafana"
           "${grafanaDatasources}:/etc/grafana/provisioning/datasources/datasources.yaml"
@@ -76,7 +76,7 @@ in {
       ${lokiName} = {
         image = "docker.io/grafana/loki:latest";
         exec = "-config.file=/etc/loki/local-config.yaml";
-        user = config.tarow.stacks.defaultUid;
+        user = config.meadow.stacks.defaultUid;
         volumes = [
           "${storage}/loki/data:/loki"
           "${lokiConfig}:/etc/loki/local-config.yaml"
@@ -100,7 +100,7 @@ in {
         image = "docker.io/grafana/alloy:latest";
         volumes = [
           "${alloyConfig}:${configDst}"
-          "${config.tarow.podman.socketLocation}:/var/run/docker.sock:ro"
+          "${config.meadow.podman.socketLocation}:/var/run/docker.sock:ro"
         ];
         exec = "run --server.http.listen-addr=0.0.0.0:${toString port} --storage.path=/var/lib/alloy/data ${configDst}";
 
@@ -122,7 +122,7 @@ in {
       in {
         image = "docker.io/prom/prometheus:latest";
         exec = "--config.file=${configDst}";
-        user = config.tarow.stacks.defaultUid;
+        user = config.meadow.stacks.defaultUid;
         volumes = [
           "${storage}/prometheus/data:/prometheus"
           "${./prometheus_config.yml}:${configDst}"
@@ -144,10 +144,10 @@ in {
       pod-exporter = {
         image = "quay.io/navidys/prometheus-podman-exporter:latest";
         volumes = [
-          "${config.tarow.podman.socketLocation}:/var/run/podman/podman.sock"
+          "${config.meadow.podman.socketLocation}:/var/run/podman/podman.sock"
         ];
         environment.CONTAINER_HOST = "unix:///var/run/podman/podman.sock";
-        user = config.tarow.stacks.defaultUid;
+        user = config.meadow.stacks.defaultUid;
         extraPodmanArgs = ["--security-opt=label=disable"];
 
         stack = stackName;

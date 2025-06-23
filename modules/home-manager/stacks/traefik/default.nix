@@ -5,15 +5,15 @@
   ...
 }: let
   name = "traefik";
-  cfg = config.tarow.stacks.${name};
+  cfg = config.meadow.stacks.${name};
 
-  storage = "${config.tarow.stacks.storageBaseDir}/${name}";
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
 in {
   imports = [
     ./extension.nix
   ];
 
-  options.tarow.stacks.${name} = {
+  options.meadow.stacks.${name} = {
     enable = lib.options.mkEnableOption name;
     domain = lib.options.mkOption {
       type = lib.types.str;
@@ -34,7 +34,7 @@ in {
     };
 
     services.podman.containers.${name} = {
-      image = "traefik:v3";
+      image = "docker.io/traefik:v3";
 
       socketActivation = [
         {
@@ -53,7 +53,7 @@ in {
       environmentFile = [config.sops.secrets."traefik/env".path];
       volumes = [
         "${storage}/letsencrypt:/letsencrypt"
-        "${config.tarow.podman.socketLocation}:/var/run/docker.sock:ro"
+        "${config.meadow.podman.socketLocation}:/var/run/docker.sock:ro"
         "${pkgs.writeText "traefik.yml" (import ./config/traefik.nix {inherit (cfg) domain;})}:/etc/traefik/traefik.yml:ro"
         "${./config/dynamic.yml}:/dynamic/config.yml"
         "${./config/IP2LOCATION-LITE-DB1.IPV6.BIN}:/plugins/geoblock/IP2LOCATION-LITE-DB1.IPV6.BIN"

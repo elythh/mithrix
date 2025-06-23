@@ -22,7 +22,7 @@
 in {
   imports = [
     {
-      tarow.stacks.homepage.services = mergedServices;
+      meadow.stacks.homepage.services = mergedServices;
     }
   ];
 

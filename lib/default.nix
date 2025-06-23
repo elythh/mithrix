@@ -1,5 +1,5 @@
 lib: pkgs: {
-  tarow = with lib; rec {
+  meadow = with lib; rec {
     mkIfElse = p: yes: no:
       mkMerge [
         (mkIf p yes)

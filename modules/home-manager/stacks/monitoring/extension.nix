@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  monitoringEnabled = config.tarow.stacks.monitoring.enable;
+  monitoringEnabled = config.meadow.stacks.monitoring.enable;
 in {
   # If a container has the logging label, add allo
   options.services.podman.containers = lib.mkOption {

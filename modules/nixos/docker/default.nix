@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.tarow.docker;
+  cfg = config.meadow.docker;
 in {
-  options.tarow.docker = {
+  options.meadow.docker = {
     enable = lib.options.mkEnableOption "Docker";
   };
 

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.tarow.bootLoader;
+  cfg = config.meadow.bootLoader;
 in {
-  options.tarow.bootLoader = {
+  options.meadow.bootLoader = {
     enable = lib.options.mkEnableOption "Bootloader Config";
   };
 

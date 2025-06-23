@@ -9,7 +9,7 @@
 
   system.stateVersion = "24.11";
 
-  tarow = {
+  meadow = {
     core = {
       enable = true;
       configLocation = "~/nix-config#mithrix";
@@ -18,6 +18,7 @@
     docker.enable = false;
     shells.enable = true;
     wg-server.enable = false;
+    murmur.enable = true;
     sops = {
       enable = true;
       extraSopsFiles = [../../secrets/mithrix/secrets.yaml];
@@ -36,8 +37,8 @@
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = lib.mkForce 0;
   networking = rec {
     firewall = {
-      allowedUDPPorts = [53 80 443 51820];
-      allowedTCPPorts = [21 53 80 443 8888] ++ (lib.range 40000 40009);
+      allowedUDPPorts = [53 80 443 51820 64738];
+      allowedTCPPorts = [21 53 80 443 6502 8080 8888 64738 25565] ++ (lib.range 40000 40009);
     };
     hostName = "mithrix";
     defaultGateway = "192.168.1.254";

@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.locale;
+  cfg = config.meadow.locale;
 in {
-  options.tarow.locale = {
+  options.meadow.locale = {
     enable = lib.options.mkEnableOption "Locale Settings";
   };
 

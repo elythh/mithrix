@@ -3,13 +3,13 @@
   config,
   ...
 }: let
-  cfg = config.tarow.stacks;
+  cfg = config.meadow.stacks;
 in {
   imports =
-    lib.tarow.readSubdirs ./.
-    ++ [./extension.nix (lib.mkAliasOptionModule ["tarow" "containers"] ["services" "podman" "containers"])];
+    lib.meadow.readSubdirs ./.
+    ++ [./extension.nix (lib.mkAliasOptionModule ["meadow" "containers"] ["services" "podman" "containers"])];
 
-  options.tarow.stacks = {
+  options.meadow.stacks = {
     enable = lib.mkEnableOption "stacks";
     defaultUid = lib.mkOption {
       type = lib.types.int;
@@ -37,6 +37,6 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    tarow.podman.enable = true;
+    meadow.podman.enable = true;
   };
 }

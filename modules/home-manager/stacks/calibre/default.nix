@@ -4,10 +4,10 @@
   ...
 }: let
   name = "calibre";
-  storage = "${config.tarow.stacks.storageBaseDir}/${name}";
-  cfg = config.tarow.stacks.${name};
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
+  cfg = config.meadow.stacks.${name};
 in {
-  options.tarow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers.${name} = {
@@ -18,9 +18,9 @@ in {
         "${storage}/library:/calibre-library"
       ];
       environment = {
-        PUID = config.tarow.stacks.defaultUid;
-        PGID = config.tarow.stacks.defaultGid;
-        TZ = config.tarow.stacks.defaultTz;
+        PUID = config.meadow.stacks.defaultUid;
+        PGID = config.meadow.stacks.defaultGid;
+        TZ = config.meadow.stacks.defaultTz;
       };
       port = 8083;
 

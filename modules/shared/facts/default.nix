@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  cfg = config.tarow.facts;
+  cfg = config.meadow.facts;
 in {
-  options.tarow.facts = with lib; {
+  options.meadow.facts = with lib; {
     username = mkOption {
       type = types.str;
       readOnly = true;

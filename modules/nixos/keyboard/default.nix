@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.keyboard;
+  cfg = config.meadow.keyboard;
 in {
-  options.tarow.keyboard = {
+  options.meadow.keyboard = {
     enable = lib.options.mkEnableOption "Keyboard Settings";
   };
 

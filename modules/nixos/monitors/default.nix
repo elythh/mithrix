@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.tarow.monitors;
+  cfg = config.meadow.monitors;
 
   monitorConfig =
     if (cfg.configuration == null)
@@ -16,7 +16,7 @@
         else cfg.configuration
       );
 in {
-  options.tarow.monitors = {
+  options.meadow.monitors = {
     configuration = lib.options.mkOption {
       type = with lib.types; nullOr (either str path);
       default = null;

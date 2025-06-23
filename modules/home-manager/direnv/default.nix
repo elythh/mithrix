@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.tarow.direnv;
+  cfg = config.meadow.direnv;
 in {
-  options.tarow.direnv = {
+  options.meadow.direnv = {
     enable = lib.options.mkEnableOption "direnv";
   };
   config = lib.mkIf cfg.enable {

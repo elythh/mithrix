@@ -6,11 +6,11 @@
   lib,
   ...
 }: let
-  cfg = config.tarow.home.mutableFile;
+  cfg = config.meadow.home.mutableFile;
 
-  stateFile = "${config.home.homeDirectory}/.config/tarow/nix-managed-files";
+  stateFile = "${config.home.homeDirectory}/.config/meadow/nix-managed-files";
 in {
-  options.tarow.home.mutableFile = lib.mkOption {
+  options.meadow.home.mutableFile = lib.mkOption {
     type = lib.types.attrsOf lib.types.lines;
     description = "Attribute set of writable files where keys are file paths relative to the home directory and values are their content.";
     default = {};

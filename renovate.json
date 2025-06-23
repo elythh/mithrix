@@ -3,8 +3,8 @@
   "prHourlyLimit": 0,
   "extends": ["config:recommended"],
   "timezone": "Europe/Berlin",
-  "reviewers": ["Tarow"],
-  "gitIgnoredAuthors": ["195547385+tarow[bot]@users.noreply.github.com"],
+  "reviewers": ["meadow"],
+  "gitIgnoredAuthors": ["195547385+meadow[bot]@users.noreply.github.com"],
   "lockFileMaintenance": { 
     "enabled": true,
     "schedule": ["* 0-3 * * 0"],

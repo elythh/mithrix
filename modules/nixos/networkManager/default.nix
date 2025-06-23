@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.networkManager;
+  cfg = config.meadow.networkManager;
 in {
-  options.tarow.networkManager = {
+  options.meadow.networkManager = {
     enable = lib.options.mkEnableOption "NetworkManager";
   };
 

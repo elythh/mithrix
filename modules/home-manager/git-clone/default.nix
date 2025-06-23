@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.tarow.git-clone;
+  cfg = config.meadow.git-clone;
   repoType =
     types.submodule
     ({name, ...}: {
@@ -31,7 +31,7 @@ with lib; let
       };
     });
 in {
-  options.tarow.git-clone = {
+  options.meadow.git-clone = {
     defaultLocation = mkOption {
       type = types.str;
       example = "$HOME/projects";

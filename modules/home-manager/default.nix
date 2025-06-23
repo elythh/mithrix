@@ -5,5 +5,5 @@
   # Additionally, you can also enable certain modules and settings in your user configuration.
 
   # When you add a new module, make sure to add an enable flag which defaults to false, so your options won't be automatically set.
-  imports = lib.tarow.readSubdirs ./.;
+  imports = lib.meadow.readSubdirs ./.;
 }

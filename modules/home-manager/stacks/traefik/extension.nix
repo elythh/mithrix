@@ -3,8 +3,8 @@
   config,
   ...
 }: let
-  stackCfg = config.tarow.stacks.traefik;
-  ip4Address = config.tarow.facts.ip4Address;
+  stackCfg = config.meadow.stacks.traefik;
+  ip4Address = config.meadow.facts.ip4Address;
 
   getPort = port: index:
     if (builtins.isInt port)

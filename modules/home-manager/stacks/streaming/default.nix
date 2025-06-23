@@ -13,11 +13,11 @@
   bazarrName = "bazarr";
   prowlarrName = "prowlarr";
 
-  cfg = config.tarow.stacks.${stackName};
-  storage = "${config.tarow.stacks.storageBaseDir}/${stackName}";
-  mediaStorage = "${config.tarow.stacks.mediaStorageBaseDir}";
+  cfg = config.meadow.stacks.${stackName};
+  storage = "${config.meadow.stacks.storageBaseDir}/${stackName}";
+  mediaStorage = "${config.meadow.stacks.mediaStorageBaseDir}";
 in {
-  options.tarow.stacks.${stackName}.enable = lib.mkEnableOption stackName;
+  options.meadow.stacks.${stackName}.enable = lib.mkEnableOption stackName;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers = {
@@ -34,12 +34,12 @@ in {
           HTTP_CONTROL_SERVER_LOG = "off";
           VPN_SERVICE_PROVIDER = "airvpn";
           VPN_TYPE = "wireguard";
-          TZ = config.tarow.stacks.defaultTz;
+          TZ = config.meadow.stacks.defaultTz;
           UPDATER_PERIOD = "12h";
           HTTPPROXY = "on";
           HEALTH_VPN_DURATION_INITIAL = "60s";
         };
-        network = [config.tarow.stacks.traefik.network];
+        network = [config.meadow.stacks.traefik.network];
 
         stack = stackName;
         port = 8888;
@@ -63,8 +63,8 @@ in {
         ];
         environmentFile = [config.sops.secrets."qbittorrent/env".path];
         environment = {
-          PUID = config.tarow.stacks.defaultUid;
-          PGID = config.tarow.stacks.defaultGid;
+          PUID = config.meadow.stacks.defaultUid;
+          PGID = config.meadow.stacks.defaultGid;
           UMASK = "022";
           WEBUI_PORT = 8080;
         };
@@ -90,9 +90,9 @@ in {
         ];
         devices = ["/dev/dri:/dev/dri"];
         environment = {
-          PUID = config.tarow.stacks.defaultUid;
-          PGID = config.tarow.stacks.defaultGid;
-          TZ = config.tarow.stacks.defaultTz;
+          PUID = config.meadow.stacks.defaultUid;
+          PGID = config.meadow.stacks.defaultGid;
+          TZ = config.meadow.stacks.defaultTz;
           JELLYFIN_PublishedServerUrl = config.services.podman.containers.${jellyfinName}.traefik.serviceDomain;
         };
 
@@ -116,9 +116,9 @@ in {
           "${mediaStorage}:/media"
         ];
         environment = {
-          PUID = config.tarow.stacks.defaultUid;
-          PGID = config.tarow.stacks.defaultGid;
-          TZ = config.tarow.stacks.defaultTz;
+          PUID = config.meadow.stacks.defaultUid;
+          PGID = config.meadow.stacks.defaultGid;
+          TZ = config.meadow.stacks.defaultTz;
         };
 
         port = 8989;
@@ -141,9 +141,9 @@ in {
           "${mediaStorage}:/media"
         ];
         environment = {
-          PUID = config.tarow.stacks.defaultUid;
-          PGID = config.tarow.stacks.defaultGid;
-          TZ = config.tarow.stacks.defaultTz;
+          PUID = config.meadow.stacks.defaultUid;
+          PGID = config.meadow.stacks.defaultGid;
+          TZ = config.meadow.stacks.defaultTz;
         };
 
         port = 7878;
@@ -166,9 +166,9 @@ in {
           "${mediaStorage}:/media"
         ];
         environment = {
-          PUID = config.tarow.stacks.defaultUid;
-          PGID = config.tarow.stacks.defaultGid;
-          TZ = config.tarow.stacks.defaultTz;
+          PUID = config.meadow.stacks.defaultUid;
+          PGID = config.meadow.stacks.defaultGid;
+          TZ = config.meadow.stacks.defaultTz;
         };
 
         port = 6767;
@@ -190,9 +190,9 @@ in {
           "${storage}/${prowlarrName}:/config"
         ];
         environment = {
-          PUID = config.tarow.stacks.defaultUid;
-          PGID = config.tarow.stacks.defaultGid;
-          TZ = config.tarow.stacks.defaultTz;
+          PUID = config.meadow.stacks.defaultUid;
+          PGID = config.meadow.stacks.defaultGid;
+          TZ = config.meadow.stacks.defaultTz;
         };
 
         port = 9696;
@@ -217,7 +217,7 @@ in {
           LOG_LEVEL = "info";
           LOG_HTML = false;
           CAPTCHA_SOLVER = "none";
-          TZ = config.tarow.stacks.defaultTz;
+          TZ = config.meadow.stacks.defaultTz;
         };
 
         stack = stackName;

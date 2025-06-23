@@ -5,11 +5,11 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.sops;
+  cfg = config.meadow.sops;
 
 
   # Read encrypted secrets from secret file (without sops config key)
-  readSecrets = file: lib.removeAttrs (lib.tarow.readYAML file) ["sops"];
+  readSecrets = file: lib.removeAttrs (lib.meadow.readYAML file) ["sops"];
 
   /* Flatten and extract all nested keys, e.g
     a:
@@ -18,7 +18,7 @@
     d: 2
     => ["a/b/c", "d"]
   */
-  getSecretKeys = secrets:  lib.tarow.flattenAttrs "" "/" secrets;
+  getSecretKeys = secrets:  lib.meadow.flattenAttrs "" "/" secrets;
   
   /* Map all keys to a default secret config. E.g.
     ["a/b/c", "d"] => { "a/b/c" = {owner = ...; group = ...;}; "d" = {owner = ...; group = ...;}; }
@@ -35,7 +35,7 @@
     |> lib.mergeAttrsList;
 
 in {
-  options.tarow.sops = {
+  options.meadow.sops = {
     enable = lib.options.mkEnableOption "sops-nix";
     extraSopsFiles = lib.options.mkOption {
       type = lib.types.listOf lib.types.path;

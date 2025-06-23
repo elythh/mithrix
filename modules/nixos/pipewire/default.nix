@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.pipewire;
+  cfg = config.meadow.pipewire;
 in {
-  options.tarow.pipewire = {
+  options.meadow.pipewire = {
     enable = lib.options.mkEnableOption "Pipewire";
   };
 

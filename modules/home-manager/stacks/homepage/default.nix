@@ -5,8 +5,8 @@
   ...
 }: let
   name = "homepage";
-  mediaStorage = config.tarow.stacks.mediaStorageBaseDir;
-  cfg = config.tarow.stacks.${name};
+  mediaStorage = config.meadow.stacks.mediaStorageBaseDir;
+  cfg = config.meadow.stacks.${name};
   yaml = pkgs.formats.yaml {};
 
   toOrderedList = attrs:
@@ -28,7 +28,7 @@
 in {
   imports = [./extension.nix];
 
-  options.tarow.stacks.${name} = {
+  options.meadow.stacks.${name} = {
     enable = lib.mkEnableOption name;
     bookmarks = lib.mkOption {
       inherit (yaml) type;
@@ -64,11 +64,11 @@ in {
         "${yaml.generate "settings.yaml" cfg.settings}:/app/config/settings.yaml"
         "${yaml.generate "widgets.yaml" cfg.widgets}:/app/config/widgets.yaml"
         "${yaml.generate "bookmarks.yaml" cfg.bookmarks}:/app/config/bookmarks.yaml"
-        "${config.tarow.podman.socketLocation}:/var/run/docker.sock:ro"
+        "${config.meadow.podman.socketLocation}:/var/run/docker.sock:ro"
       ];
       environment = {
-        PUID = config.tarow.stacks.defaultUid;
-        PGID = config.tarow.stacks.defaultGid;
+        PUID = config.meadow.stacks.defaultUid;
+        PGID = config.meadow.stacks.defaultGid;
         HOMEPAGE_ALLOWED_HOSTS = config.services.podman.containers.${name}.traefik.serviceHost;
       };
       # environmentFile = [config.sops.secrets."homepage/env".path];
@@ -79,7 +79,7 @@ in {
       };
     };
 
-    tarow.stacks.${name} = {
+    meadow.stacks.${name} = {
       docker.local.socket = "/var/run/docker.sock";
 
       settings.statusStyle = "dot";

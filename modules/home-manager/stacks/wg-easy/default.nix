@@ -4,10 +4,10 @@
   ...
 }: let
   name = "wg-easy";
-  storage = "${config.tarow.stacks.storageBaseDir}/${name}";
-  cfg = config.tarow.stacks.${name};
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
+  cfg = config.meadow.stacks.${name};
 in {
-  options.tarow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers.${name} = {
@@ -24,7 +24,7 @@ in {
       ];
      #  environmentFile = [config.sops.secrets."wg-easy/env".path];
       environment = {
-        WG_HOST = "vpn.${config.tarow.stacks.traefik.domain}";
+        WG_HOST = "vpn.${config.meadow.stacks.traefik.domain}";
         WG_DEFAULT_DNS = "1.1.1.1";
         WG_DEFAULT_ADDRESS = "172.20.0.x";
       };

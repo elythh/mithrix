@@ -4,10 +4,10 @@
   ...
 }: let
   name = "changedetection";
-  storage = "${config.tarow.stacks.storageBaseDir}/${name}";
-  cfg = config.tarow.stacks.${name};
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
+  cfg = config.meadow.stacks.${name};
 in {
-  options.tarow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers = {

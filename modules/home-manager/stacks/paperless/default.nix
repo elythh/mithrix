@@ -7,10 +7,10 @@
   dbName = "${name}-db";
   brokerName = "${name}-broker";
 
-  cfg = config.tarow.stacks.${name};
-  storage = "${config.tarow.stacks.storageBaseDir}/${name}";
+  cfg = config.meadow.stacks.${name};
+  storage = "${config.meadow.stacks.storageBaseDir}/${name}";
 in {
-  options.tarow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
   config = lib.mkIf cfg.enable {
     services.podman.containers = {
@@ -28,13 +28,13 @@ in {
           PAPERLESS_DBHOST = dbName;
           PAPERLESS_DBNAME = config.services.podman.containers.${dbName}.environment.POSTGRES_DB;
           PAPERLESS_DBUSER = config.services.podman.containers.${dbName}.environment.POSTGRES_USER;
-          USERMAP_UID = config.tarow.stacks.defaultUid;
-          USERMAP_GID = config.tarow.stacks.defaultGid;
+          USERMAP_UID = config.meadow.stacks.defaultUid;
+          USERMAP_GID = config.meadow.stacks.defaultGid;
           PAPERLESS_OCR_LANGUAGES = "eng fra";
-          PAPERLESS_TIME_ZONE = config.tarow.stacks.defaultTz;
+          PAPERLESS_TIME_ZONE = config.meadow.stacks.defaultTz;
           PAPERLESS_OCR_LANGUAGE = "deu";
           PAPERLESS_FILENAME_FORMAT = "{{created_year}}/{{correspondent}}/{{title}}";
-          PAPERLESS_URL = "https://${name}.${config.tarow.stacks.traefik.domain}";
+          PAPERLESS_URL = "https://${name}.${config.meadow.stacks.traefik.domain}";
         };
         environmentFile = [config.sops.secrets."paperless/env".path];
 

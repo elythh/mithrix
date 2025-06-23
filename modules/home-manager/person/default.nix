@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  options.tarow.person = {
+  options.meadow.person = {
     name = lib.options.mkOption {
       type = lib.types.str;
       example = ''Max Mustermann'';

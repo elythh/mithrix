@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.tarow.shells;
+  cfg = config.meadow.shells;
 in {
-  options.tarow.shells = {
+  options.meadow.shells = {
     enable = lib.options.mkOption {
       type = lib.types.bool;
       example = ''true'';

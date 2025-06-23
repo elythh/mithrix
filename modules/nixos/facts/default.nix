@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.tarow.facts;
+  cfg = config.meadow.facts;
 in {
   imports = [(lib.mkAliasOptionModule ["users" "mainUser"] ["users" "users" cfg.username])];
 
@@ -20,7 +20,7 @@ in {
       uid = cfg.uid;
       group = config.users.groups.${cfg.username}.name;
 
-      extraGroups = ["users" "wheel" (lib.mkIf config.tarow.networkManager.enable "networkmanager")];
+      extraGroups = ["users" "wheel" (lib.mkIf config.meadow.networkManager.enable "networkmanager")];
       shell = pkgs.fish;
       linger = true;
     };

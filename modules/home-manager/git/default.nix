@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.tarow.git;
+  cfg = config.meadow.git;
   shellAbbrs = {
     gl = "git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit";
     gco = "git checkout";
@@ -30,7 +30,7 @@
       gcma = ''git commit --amend -m'';
     };
 in {
-  options.tarow.git = {
+  options.meadow.git = {
     enable = lib.options.mkOption {
       type = lib.types.bool;
       example = ''true'';
@@ -41,8 +41,8 @@ in {
   config.programs = lib.mkIf cfg.enable {
     git = {
       enable = true;
-      userEmail = config.tarow.person.email;
-      userName = config.tarow.person.name;
+      userEmail = config.meadow.person.email;
+      userName = config.meadow.person.name;
       extraConfig = {
         init.defaultBranch = "main";
         push.autoSetupRemote = true;

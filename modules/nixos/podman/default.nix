@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.tarow.podman;
+  cfg = config.meadow.podman;
 in {
-  options.tarow.podman = {
+  options.meadow.podman = {
     enable = lib.options.mkEnableOption "Podman";
   };
 

@@ -1,5 +1,5 @@
 {config, ...}: let
-  cfg = config.tarow.facts;
+  cfg = config.meadow.facts;
 in {
   config = {
     home.username = cfg.username;
