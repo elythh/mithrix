@@ -37,7 +37,7 @@
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = lib.mkForce 0;
   networking = rec {
     firewall = {
-      allowedUDPPorts = [53 80 443 51820 64738];
+      allowedUDPPorts = [53 80 443 24454 51820 64738];
       allowedTCPPorts = [21 53 80 443 6502 8080 8888 64738 25565] ++ (lib.range 40000 40009);
     };
     hostName = "mithrix";

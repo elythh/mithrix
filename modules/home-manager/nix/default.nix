@@ -36,8 +36,6 @@ in {
 
   # Disable nixpkgs overlays, if home-manager is running as submodule with useGlobalPkgs=true
   nixpkgs = lib.mkIf (isStandalone || !osConfig.home-manager.useGlobalPkgs) {
-    # You can add overlays here
-
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages

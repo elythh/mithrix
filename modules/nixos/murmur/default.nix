@@ -16,6 +16,7 @@ in {
       extraConfig = ''
         ice="tcp -h 127.0.0.1 -p 6502"
       '';
+      bandwidth = 120000;
       };
   };
 }
