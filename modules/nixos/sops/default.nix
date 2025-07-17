@@ -55,7 +55,7 @@ in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [pkgs.sops];
+    environment.systemPackages = [pkgs.sops pkgs.wget pkgs.unzip];
     sops = {
       defaultSopsFile = ../../../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";

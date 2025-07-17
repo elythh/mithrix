@@ -5,6 +5,7 @@
       nix
       home-manager
       git
+      wget
 
       sops
       ssh-to-age
