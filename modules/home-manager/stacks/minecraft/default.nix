@@ -94,7 +94,7 @@ in {
         # ports= [ "25565:25565"];
         environment = {
           VERSION =  "1.21.1";
-          NEOFORGE_VERSION = "21.1.143";
+          NEOFORGE_VERSION = "21.1.152";
           EULA = "true";
           ONLINE_MODE= "FALSE";
           MEMORY = "6G";

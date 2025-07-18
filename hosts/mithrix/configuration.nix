@@ -1,5 +1,5 @@
 {
-  inputs,
+  pkgs,
   lib,
   ...
 }: {
@@ -33,7 +33,7 @@
     };
   };
 
-  time.timeZone = "Europe/Europe";
+  time.timeZone = "Europe/Paris";
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = lib.mkForce 0;
   networking = rec {
     firewall = {
@@ -57,5 +57,46 @@
       enable = true;
       port = 9191;
       enabledCollectors = [ "systemd" ];
+  };
+
+  systemd.timers."whitelist-off" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 19:30:00";
+      # OnUnitActiveSec = "30s";
+      # OnBootSec = "30s";
+      Unit = "whitelist-bookyytown-off.service";
+    };
+  };
+  systemd.services."whitelist-bookyytown-off" = {
+    script = ''
+      set -eu
+      ${pkgs.podman}/bin/podman exec bookyytown rcon-cli -- whitelist off
+    '';
+    serviceConfig = {
+      User = "gwen";
+    };
+  };
+
+  systemd.timers."whitelist-on" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 01:00:00";
+      # OnUnitActiveSec = "30s";
+      # OnBootSec = "30s";
+      Unit = "whitelist-bookyytown-on.service";
+    };
+  };
+  systemd.services."whitelist-bookyytown-on" = {
+    script = ''
+      set -eu
+      ${pkgs.podman}/bin/podman exec bookyytown rcon-cli -- whitelist on
+      ${pkgs.podman}/bin/podman exec bookyytown rcon-cli -- say "Activation de la whitelist, à demain"
+      sleep 10s
+      ${pkgs.podman}/bin/podman exec bookyytown rcon-cli -- kick @a
+    '';
+    serviceConfig = {
+      User = "gwen";
+    };
   };
 }
