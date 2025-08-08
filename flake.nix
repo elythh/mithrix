@@ -2,8 +2,7 @@
   description = "NixOS and Home Manager Configuration Flake for my Hosts";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -26,11 +25,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    copyparty.url = "github:9001/copyparty";
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    copyparty,
     ...
   } @ inputs: let
     outputs = self;
@@ -64,6 +66,7 @@
             ./hosts/shared/shared.nix
             ./hosts/shared/configuration.nix
             systemConfig
+            copyparty.nixosModules.default
           ]
           ++ lib.lists.optionals (userConfigs != null) [
             home-manager.nixosModules.home-manager

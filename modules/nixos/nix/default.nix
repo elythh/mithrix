@@ -22,7 +22,6 @@
     # This results in tools like "nix search" and "nix run" to use the same nixpkgs instance as the system flake.
     # Also see option `nixpkgs.flake.setFlakeRegistry`
     registry = {
-      unstable.flake = inputs.nixpkgs-unstable;
       nixpkgs.flake = inputs.nixpkgs;
     };
   };
@@ -30,6 +29,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
+       inputs.copyparty.overlays.default
       # (self: super: {
       #   murmur = super.murmur.overrideAttrs (oldAttrs: {
       #     version = "1.3.3";

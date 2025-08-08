@@ -21,7 +21,7 @@ in {
         PGID = config.meadow.stacks.defaultGid;
         TZ = config.meadow.stacks.defaultTz;
       };
-      exec = "bash -c 'node epic-games; node prime-gaming; node gog; echo sleeping; sleep 1d'";
+      # exec = "bash -c 'node epic-games; node prime-gaming; node gog; echo sleeping; sleep 1d'";
 
       homepage = {
         category = "Utilities";

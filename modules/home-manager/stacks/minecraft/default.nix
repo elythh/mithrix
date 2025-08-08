@@ -16,98 +16,83 @@ in {
       };
     };
     services.podman.containers = {
-      #
-      # ftp = {
-      #   image = "docker.io/garethflowers/ftp-server";
-      #   volumes = [
-      #     "${storage}/bookyytown:/home/gwen"
-      #   ];
+      # mc-proxy = {
+      #  image = "docker.io/itzg/mc-proxy";
+      #   ports= [ "25565:25577" "25577:25577/udp" ];
       #   environment = {
-      #     PUBLIC_IP = "192.168.1.111";
-      #     FTP_USER = "gwen";
-      #     UID = "1000";
-      #     GID = "1001";
+      #     TYPE = "VELOCITY";
+      #     UID = config.meadow.stacks.defaultUid;
+      #     GID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #     EXTRA_ARGS = "-Dvelocity.max-known-packs=101";
       #   };
-      #   ports = [
-      #     "21:21"
-      #     "40000-40009:40000-40009"
+      #   volumes = [
+      #     "${storage}/proxy:/server"
       #   ];
-      #   environmentFile = [config.sops.secrets."ftp/env".path];
+      #   network = [ "mc-backend"];
+      #
       # };
-
-      mc-proxy = {
-       image = "docker.io/itzg/mc-proxy";
-        ports= [ "25565:25577" "25577:25577/udp" ];
+      # bookyytown = {
+      #  image = "docker.io/itzg/minecraft-server:latest";
+      #   # ports= [ "25565:25565"];
+      #   environment = {
+      #     VERSION =  "1.21.1";
+      #     NEOFORGE_VERSION = "21.1.152";
+      #     EULA = "true";
+      #     ONLINE_MODE= "FALSE";
+      #     INIT_MEMORY = "6G";
+      #     MAX_MEMORY = "24G";
+      #     TYPE = "NEOFORGE";
+      #     UID = config.meadow.stacks.defaultUid;
+      #     GID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #     JVM_XX_OPTS = "-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15";
+      #   };
+      #   volumes = [
+      #     "${storage}/bookyytown/data:/data"
+      #   ];
+      #   network = [ "mc-backend"];
+      # };
+      adventure = {
+       image = "docker.io/itzg/minecraft-server:latest";
         environment = {
-          TYPE = "VELOCITY";
-          PLUGINS = "https://hangarcdn.papermc.io/plugins/ViaVersion/ViaVersion/versions/5.4.0/PAPER/ViaVersion-5.4.0.jar,https://hangarcdn.papermc.io/plugins/ViaVersion/ViaBackwards/versions/5.4.0/PAPER/ViaBackwards-5.4.0.jar";
+          VERSION =  "1.20.1";
+          EULA = "true";
+          CF_API_KEY = "$2a$10$BZZVwIQpNzAUAQOavsaLj.P8B8O3O/RW3uQ2WjkbINitf4UwmEb.q";
+          ONLINE_MODE= "TRUE";
+          INIT_MEMORY = "6G";
+          MAX_MEMORY = "24G";
+          TYPE = "FABRIC";
           UID = config.meadow.stacks.defaultUid;
           GID = config.meadow.stacks.defaultGid;
           TZ = config.meadow.stacks.defaultTz;
-          EXTRA_ARGS = "-Dvelocity.max-known-packs=101";
+          JVM_XX_OPTS = "-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15";
         };
+        ports= [ "25565:25565" ];
         volumes = [
-          "${storage}/proxy:/server"
+          "${storage}/adventureplus:/data"
         ];
         network = [ "mc-backend"];
-
       };
-      # mc-home = {
-      #  image = "docker.io/itzg/minecraft-server:java8";
+      # cinema = {
+      #  image = "docker.io/itzg/minecraft-server:latest";
+      #   # ports= [ "25565:25565"];
       #   environment = {
-      #     VERSION =  "1.8.8";
+      #     VERSION =  "1.21.1";
+      #     NEOFORGE_VERSION = "21.1.152";
       #     EULA = "true";
       #     ONLINE_MODE= "FALSE";
-      #     MEMORY = "16G";
-      #     SPIGET_RESOURCES = "73113,9923";
-      #     TYPE = "PAPER";
+      #     MEMORY = "6G";
+      #     TYPE = "NEOFORGE";
       #     UID = config.meadow.stacks.defaultUid;
       #     GID = config.meadow.stacks.defaultGid;
       #     TZ = config.meadow.stacks.defaultTz;
       #   };
       #   volumes = [
-      #     "${storage}/home:/data"
+      #     "${storage}/cinema/data:/data"
       #   ];
       #   network = [ "mc-backend"];
       # };
-      bookyytown = {
-       image = "docker.io/itzg/minecraft-server:latest";
-        # ports= [ "25565:25565"];
-        environment = {
-          VERSION =  "1.21.1";
-          NEOFORGE_VERSION = "21.1.152";
-          EULA = "true";
-          ONLINE_MODE= "FALSE";
-          MEMORY = "20G";
-          TYPE = "NEOFORGE";
-          UID = config.meadow.stacks.defaultUid;
-          GID = config.meadow.stacks.defaultGid;
-          TZ = config.meadow.stacks.defaultTz;
-        };
-        volumes = [
-          "${storage}/bookyytown/data:/data"
-        ];
-        network = [ "mc-backend"];
-      };
-      cinema = {
-       image = "docker.io/itzg/minecraft-server:latest";
-        # ports= [ "25565:25565"];
-        environment = {
-          VERSION =  "1.21.1";
-          NEOFORGE_VERSION = "21.1.152";
-          EULA = "true";
-          ONLINE_MODE= "FALSE";
-          MEMORY = "6G";
-          TYPE = "NEOFORGE";
-          UID = config.meadow.stacks.defaultUid;
-          GID = config.meadow.stacks.defaultGid;
-          TZ = config.meadow.stacks.defaultTz;
-        };
-        volumes = [
-          "${storage}/cinema/data:/data"
-        ];
-        network = [ "mc-backend"];
-      };
       # bookyytown2 = {
       #  image = "docker.io/itzg/minecraft-server:latest";
       #   environment = {
