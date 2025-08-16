@@ -13,9 +13,12 @@ in {
     services.podman.containers.${name} = {
       image = "ghcr.io/viren070/aiostreams:latest";
       environmentFile = [config.sops.secrets."aiostreams/env".path];
-        volumes = [
-          "${storage}/data:/app/data"
-        ];
+      volumes = [
+        "${storage}/data:/app/data"
+      ];
+      environment = {
+        BASE_URL = "https://${name}.elyth.xyz";
+      };
 
       port = 3000;
       traefik.name = name;
