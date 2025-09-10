@@ -43,18 +43,6 @@
             - 1.1.1.1:53
             - 8.8.8.8:53
 
-  experimental:
-    plugins:
-      geoblock:
-        moduleName: github.com/nscuro/traefik-plugin-geoblock
-        version: v0.14.0
-      sablier:
-        moduleName: "github.com/sablierapp/sablier"
-        version: "v1.8.5"
-      bouncer:
-        moduleName: github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
-        version: v1.4.2
-
   accessLog:
     format: json
 
