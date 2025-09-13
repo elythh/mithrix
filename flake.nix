@@ -25,14 +25,11 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    copyparty.url = "github:9001/copyparty";
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
-    copyparty,
     ...
   } @ inputs: let
     outputs = self;
@@ -66,7 +63,6 @@
             ./hosts/shared/shared.nix
             ./hosts/shared/configuration.nix
             systemConfig
-            copyparty.nixosModules.default
           ]
           ++ lib.lists.optionals (userConfigs != null) [
             home-manager.nixosModules.home-manager

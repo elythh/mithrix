@@ -39,7 +39,7 @@
       streaming.enable = true;
       aiostreams.enable = true;
       free-game.enable = true;
-      monitoring.enable = true;
+      # monitoring.enable = true;
       # mumble.enable = false;
       minecraft.enable = true;
       copyparty.enable = true;

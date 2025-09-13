@@ -6,6 +6,8 @@
       home-manager
       git
       wget
+      nh
+      lazygit
 
       sops
       ssh-to-age

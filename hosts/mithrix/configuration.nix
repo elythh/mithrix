@@ -17,7 +17,6 @@
     bootLoader.enable = true;
     docker.enable = false;
     shells.enable = true;
-    wg-server.enable = false;
     murmur.enable = true;
     sops = {
       enable = true;
