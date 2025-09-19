@@ -9,5 +9,6 @@
   };
 
   programs.home-manager.enable = true;
+  programs.direnv.enable = true;
   news.display = "silent";
 }
