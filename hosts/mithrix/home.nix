@@ -26,6 +26,7 @@
     podman.enable = true;
     stacks = {
       enable = true;
+      actual.enable = true;
       paperless.enable = true;
       immich.enable = true;
       homepage.enable = true;
