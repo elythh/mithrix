@@ -39,6 +39,7 @@
       monitoring.enable = true;
       minecraft.enable = true;
       copyparty.enable = true;
+      silverbullet.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
