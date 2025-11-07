@@ -35,15 +35,15 @@ in {
 
         dependsOn = [redisName dbName];
 
-        traefik = {
-          name = name;
-          subDomain = "photo";
-          middlewares = ["public"];
-        };
+        # traefik = {
+        #   name = name;
+        #   subDomain = "photo";
+        #   middlewares = ["public"];
+        # };
+        #
+        # port = 2283;
 
-        port = 2283;
-
-        stack = name;
+        stack = "newt";
 
         homepage = {
           category = "Media";
@@ -57,7 +57,7 @@ in {
 
       ${redisName} = {
         image = "docker.io/redis:6.2";
-        stack = name;
+        stack = "newt";
       };
 
       ${dbName} = {
@@ -70,14 +70,14 @@ in {
           POSTGRES_DB = env.DB_DATABASE_NAME;
         };
 
-        stack = name;
+        stack = "newt";
       };
 
       ${mlName} = {
         image = "ghcr.io/immich-app/immich-machine-learning:release";
         volumes = ["${storage}/model-cache:/cache"];
 
-        stack = name;
+        stack = "newt";
       };
     };
   };

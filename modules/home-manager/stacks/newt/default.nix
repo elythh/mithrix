@@ -12,6 +12,12 @@ in {
     services.podman.containers.${name} = {
       image = "docker.io/fosrl/newt:latest";
       environmentFile = [config.sops.secrets."newt/env".path];
+      volumes = [
+        "${config.meadow.podman.socketLocation}:/var/run/docker.sock:ro"
+      ];
+
+      stack = "newt";
+
       homepage = {
         category = "Utilities";
         name = "newt";

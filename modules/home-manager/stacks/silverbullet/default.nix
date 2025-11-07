@@ -14,7 +14,7 @@ in {
       image = "ghcr.io/silverbulletmd/silverbullet:v2";
       volumes = ["${storage}/space:/space"];
       port = 3000;
-      traefik.name = "notes";
+      stack = "newt";
       homepage = {
         category = "Media";
         name = "silverbullet";
