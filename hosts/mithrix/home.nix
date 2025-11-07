@@ -36,7 +36,7 @@
       audiobookshelf.enable = true;
       streaming.enable = true;
       aiostreams.enable = true;
-      free-game.enable = true;
+      free-game.enable = false;
       monitoring.enable = true;
       minecraft.enable = true;
       copyparty.enable = true;
