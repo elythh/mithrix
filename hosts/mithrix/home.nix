@@ -42,6 +42,7 @@
       copyparty.enable = true;
       silverbullet.enable = true;
       golink.enable = true;
+      newt.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
