@@ -15,7 +15,11 @@ in {
       volumes = ["${storage}/pocketid:/app/data"];
       environmentFile = [config.sops.secrets."pocketid/env".path];
       port = 1411;
-      traefik.name = "auth";
+      traefik = {
+        name = name;
+        subDomain = "auth";
+        middlewares = ["public"];
+      };
       homepage = {
         category = "Utilities";
         name = "pocketid";
