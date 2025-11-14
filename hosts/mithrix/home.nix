@@ -42,6 +42,8 @@
       copyparty.enable = true;
       silverbullet.enable = true;
       golink.enable = true;
+      glance.enable = true;
+      pocketid.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
