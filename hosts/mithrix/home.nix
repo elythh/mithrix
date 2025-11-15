@@ -45,6 +45,7 @@
       glance.enable = true;
       pocketid.enable = true;
       booklore.enable = true;
+      ephemera.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";

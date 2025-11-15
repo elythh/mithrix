@@ -17,7 +17,7 @@ in {
       environmentFile = [config.sops.secrets."booklore/env".path];
       stack = name;
       volumes = [
-        "${storage}/booklore/books:/books"
+        "${storage}/booklore/books:/books:rw"
         "${storage}/booklore/data:/app/data"
         "${storage}/booklore/bookdrop:/bookdrop"
       ];
@@ -33,7 +33,7 @@ in {
       };
       traefik = {
         name = name;
-        subDomain = "book";
+        subDomain = "books";
       };
       port = 6060;
     };
