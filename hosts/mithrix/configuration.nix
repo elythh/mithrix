@@ -44,6 +44,14 @@
     };
   };
 
+  services.comin = {
+    enable = true;
+    remotes = [{
+      name = "origin";
+      url = "https://github.com/elythh/mithrix";
+      branches.main.name = "main";
+    }];
+  };
   services.prometheus.exporters.node = {
       enable = true;
       port = 9191;
