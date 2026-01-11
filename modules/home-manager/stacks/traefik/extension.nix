@@ -76,7 +76,7 @@ in {
         labels =
           lib.optionalAttrs enableTraefik {
             "traefik.enable" = "true";
-            "traefik.http.routers.${name}.rule" = ''Host(\`${fullHost}\`)'';
+            "traefik.http.routers.${name}.rule" = ''Host(`${fullHost}`)'';
             "traefik.http.routers.${name}.entrypoints" = "websecure";
             "traefik.http.routers.${name}.service" = name;
             "traefik.http.services.${name}.loadbalancer.server.port" = containerPort;

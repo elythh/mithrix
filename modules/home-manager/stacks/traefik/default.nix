@@ -60,7 +60,7 @@ in {
       labels = lib.mkForce {
         "traefik.enable" = "true";
         "traefik.http.routers.api.entrypoints" = "websecure";
-        "traefik.http.routers.api.rule" = ''Host(\`${name}.${cfg.domain}\`)'';
+        "traefik.http.routers.api.rule" = ''Host(`${name}.${cfg.domain}`)'';
         "traefik.http.routers.api.middlewares" = "private-chain@file";
         "traefik.http.routers.api.service" = "api@internal";
          "logging.alloy" = "true";
