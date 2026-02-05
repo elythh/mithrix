@@ -11,6 +11,7 @@
   sonarrName = "sonarr";
   radarrName = "radarr";
   bazarrName = "bazarr";
+  lidarrName = "lidarr";
   prowlarrName = "prowlarr";
 
   cfg = config.meadow.stacks.${stackName};
@@ -21,42 +22,40 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.podman.containers = {
-      ${gluetunName} = {
-        image = "docker.io/qmcgaw/gluetun:latest";
-        addCapabilities = ["NET_ADMIN"];
-        devices = ["/dev/net/tun:/dev/net/tun"];
-        # volumes = [
-        #   "${config.sops.secrets."gluetun/config".path}:/gluetun/auth/config.toml"
-        # ];
-        environmentFile = [config.sops.secrets."gluetun/env".path];
-        environment = {
-          WIREGUARD_MTU = 1320;
-          HTTP_CONTROL_SERVER_LOG = "off";
-          VPN_SERVICE_PROVIDER = "airvpn";
-          VPN_TYPE = "wireguard";
-          TZ = config.meadow.stacks.defaultTz;
-          UPDATER_PERIOD = "12h";
-          HTTPPROXY = "on";
-          HEALTH_VPN_DURATION_INITIAL = "60s";
-        };
-        network = [config.meadow.stacks.traefik.network];
-
-        stack = stackName;
-        port = 8888;
-        homepage = {
-          category = "Networking";
-          name = "Gluetun";
-          settings = {
-            description = "VPN client with firewall and proxy";
-            icon = "gluetun";
-          };
-        };
-      };
-
+      # ${gluetunName} = {
+      #   image = "docker.io/qmcgaw/gluetun:latest";
+      #   addCapabilities = ["NET_ADMIN"];
+      #   devices = ["/dev/net/tun:/dev/net/tun"];
+      #   # volumes = [
+      #   #   "${config.sops.secrets."gluetun/config".path}:/gluetun/auth/config.toml"
+      #   # ];
+      #   environmentFile = [config.sops.secrets."gluetun/env".path];
+      #   environment = {
+      #     WIREGUARD_MTU = 1320;
+      #     HTTP_CONTROL_SERVER_LOG = "off";
+      #     VPN_SERVICE_PROVIDER = "airvpn";
+      #     VPN_TYPE = "wireguard";
+      #     TZ = config.meadow.stacks.defaultTz;
+      #     UPDATER_PERIOD = "12h";
+      #     HTTPPROXY = "on";
+      #     HEALTH_VPN_DURATION_INITIAL = "60s";
+      #   };
+      #   network = [config.meadow.stacks.traefik.network];
+      #
+      #   stack = stackName;
+      #   port = 8888;
+      #   homepage = {
+      #     category = "Networking";
+      #     name = "Gluetun";
+      #     settings = {
+      #       description = "VPN client with firewall and proxy";
+      #       icon = "gluetun";
+      #     };
+      #   };
+      # };
+      #
       ${qbittorrentName} = {
         image = "docker.io/linuxserver/qbittorrent:latest";
-        dependsOn = ["gluetun"];
-        network = lib.mkForce ["container:${gluetunName}"];
         volumes = [
           "${storage}/${qbittorrentName}:/config"
           "${mediaStorage}:/media"
@@ -82,130 +81,190 @@ in {
         };
       };
 
-      ${jellyfinName} = {
-        image = "lscr.io/linuxserver/jellyfin:latest";
+      # ${jellyfinName} = {
+      #   image = "lscr.io/linuxserver/jellyfin:latest";
+      #   volumes = [
+      #     "${storage}/${jellyfinName}:/config"
+      #     "${mediaStorage}:/media"
+      #   ];
+      #   devices = ["/dev/dri:/dev/dri"];
+      #   environment = {
+      #     PUID = config.meadow.stacks.defaultUid;
+      #     PGID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #     JELLYFIN_PublishedServerUrl = config.services.podman.containers.${jellyfinName}.traefik.serviceDomain;
+      #   };
+      #
+      #   port = 8096;
+      #   stack = stackName;
+      #   traefik.name = jellyfinName;
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Jellyfin";
+      #     settings = {
+      #       description = "Self-hosted media server";
+      #       icon = "jellyfin";
+      #     };
+      #   };
+      # };
+      #
+      # ${sonarrName} = {
+      #   image = "lscr.io/linuxserver/sonarr:latest";
+      #   volumes = [
+      #     "${storage}/${sonarrName}:/config"
+      #     "${mediaStorage}:/media"
+      #   ];
+      #   environment = {
+      #     PUID = config.meadow.stacks.defaultUid;
+      #     PGID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #   };
+      #
+      #   port = 8989;
+      #   stack = stackName;
+      #   traefik.name = sonarrName;
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Sonarr";
+      #     settings = {
+      #       description = "Series Management";
+      #       icon = "sonarr";
+      #     };
+      #   };
+      # };
+      #
+      # ${radarrName} = {
+      #   image = "lscr.io/linuxserver/radarr:latest";
+      #   volumes = [
+      #     "${storage}/${radarrName}:/config"
+      #     "${mediaStorage}:/media"
+      #   ];
+      #   environment = {
+      #     PUID = config.meadow.stacks.defaultUid;
+      #     PGID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #   };
+      #
+      #   port = 7878;
+      #   stack = stackName;
+      #   traefik.name = radarrName;
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Radarr";
+      #     settings = {
+      #       description = "Movie Management";
+      #       icon = "radarr";
+      #     };
+      #   };
+      # };
+
+      # ${bazarrName} = {
+      #   image = "lscr.io/linuxserver/bazarr:latest";
+      #   volumes = [
+      #     "${storage}/${bazarrName}:/config"
+      #     "${mediaStorage}:/media"
+      #   ];
+      #   environment = {
+      #     PUID = config.meadow.stacks.defaultUid;
+      #     PGID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #   };
+      #
+      #   port = 6767;
+      #   stack = stackName;
+      #   traefik.name = bazarrName;
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Bazarr";
+      #     settings = {
+      #       description = "Subtitle Management";
+      #       icon = "bazarr";
+      #     };
+      #   };
+      # };
+      #
+      # ${prowlarrName} = {
+      #   image = "lscr.io/linuxserver/prowlarr:latest";
+      #   volumes = [
+      #     "${storage}/${prowlarrName}:/config"
+      #   ];
+      #   environment = {
+      #     PUID = config.meadow.stacks.defaultUid;
+      #     PGID = config.meadow.stacks.defaultGid;
+      #     TZ = config.meadow.stacks.defaultTz;
+      #   };
+      #
+      #   port = 9696;
+      #   stack = stackName;
+      #   traefik.name = prowlarrName;
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Prowlarr";
+      #     settings = {
+      #       description = "Indexer Management";
+      #       icon = "prowlarr";
+      #     };
+      #   };
+      # };
+
+      ${lidarrName} = {
+        image = "lscr.io/linuxserver/lidarr:nightly";
         volumes = [
-          "${storage}/${jellyfinName}:/config"
-          "${mediaStorage}:/media"
+          "${storage}/${lidarrName}:/config"
+          "${storage}/lidify/music:/music"
         ];
-        devices = ["/dev/dri:/dev/dri"];
         environment = {
           PUID = config.meadow.stacks.defaultUid;
           PGID = config.meadow.stacks.defaultGid;
           TZ = config.meadow.stacks.defaultTz;
-          JELLYFIN_PublishedServerUrl = config.services.podman.containers.${jellyfinName}.traefik.serviceDomain;
         };
 
-        port = 8096;
+        port = 8686;
         stack = stackName;
-        traefik.name = jellyfinName;
+        traefik.name = lidarrName;
         homepage = {
           category = "Media";
-          name = "Jellyfin";
+          name = "Lidarr";
           settings = {
-            description = "Self-hosted media server";
-            icon = "jellyfin";
+            description = "Music manager";
+            icon = "Lidarr";
           };
         };
       };
 
-      ${sonarrName} = {
-        image = "lscr.io/linuxserver/sonarr:latest";
+      soulseek = {
+        image = "docker.io/slskd/slskd:latest";
         volumes = [
-          "${storage}/${sonarrName}:/config"
-          "${mediaStorage}:/media"
+          "${storage}/data:/app"
+          "${config.meadow.stacks.storageBaseDir}/lidify/music:/downloads"
         ];
         environment = {
-          PUID = config.meadow.stacks.defaultUid;
-          PGID = config.meadow.stacks.defaultGid;
-          TZ = config.meadow.stacks.defaultTz;
+          SLSKD_REMOTE_CONFIGURATION = "true";
         };
 
-        port = 8989;
+        port = 5030;
         stack = stackName;
-        traefik.name = sonarrName;
+        traefik.name = "soulseek";
         homepage = {
           category = "Media";
-          name = "Sonarr";
+          name = "Soulseek";
           settings = {
-            description = "Series Management";
-            icon = "sonarr";
+            description = "Music downloader";
+            icon = "Soulseek";
           };
         };
       };
 
-      ${radarrName} = {
-        image = "lscr.io/linuxserver/radarr:latest";
+      soularr = {
+        image = "docker.io/mrusse08/soularr:latest";
         volumes = [
-          "${storage}/${radarrName}:/config"
-          "${mediaStorage}:/media"
+          "${storage}/soularr:/data"
+          "${config.meadow.stacks.storageBaseDir}/lidify/music:/downloads"
         ];
         environment = {
-          PUID = config.meadow.stacks.defaultUid;
-          PGID = config.meadow.stacks.defaultGid;
           TZ = config.meadow.stacks.defaultTz;
         };
-
-        port = 7878;
         stack = stackName;
-        traefik.name = radarrName;
-        homepage = {
-          category = "Media";
-          name = "Radarr";
-          settings = {
-            description = "Movie Management";
-            icon = "radarr";
-          };
-        };
-      };
-
-      ${bazarrName} = {
-        image = "lscr.io/linuxserver/bazarr:latest";
-        volumes = [
-          "${storage}/${bazarrName}:/config"
-          "${mediaStorage}:/media"
-        ];
-        environment = {
-          PUID = config.meadow.stacks.defaultUid;
-          PGID = config.meadow.stacks.defaultGid;
-          TZ = config.meadow.stacks.defaultTz;
-        };
-
-        port = 6767;
-        stack = stackName;
-        traefik.name = bazarrName;
-        homepage = {
-          category = "Media";
-          name = "Bazarr";
-          settings = {
-            description = "Subtitle Management";
-            icon = "bazarr";
-          };
-        };
-      };
-
-      ${prowlarrName} = {
-        image = "lscr.io/linuxserver/prowlarr:latest";
-        volumes = [
-          "${storage}/${prowlarrName}:/config"
-        ];
-        environment = {
-          PUID = config.meadow.stacks.defaultUid;
-          PGID = config.meadow.stacks.defaultGid;
-          TZ = config.meadow.stacks.defaultTz;
-        };
-
-        port = 9696;
-        stack = stackName;
-        traefik.name = prowlarrName;
-        homepage = {
-          category = "Media";
-          name = "Prowlarr";
-          settings = {
-            description = "Indexer Management";
-            icon = "prowlarr";
-          };
-        };
       };
 
       flaresolverr = {

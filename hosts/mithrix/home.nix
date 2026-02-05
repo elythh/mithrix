@@ -34,7 +34,7 @@
       # wg-easy.enable = true;
       dozzle.enable = true;
       audiobookshelf.enable = true;
-      # streaming.enable = true;
+      streaming.enable = true;
       aiostreams.enable = true;
       # free-game.enable = true;
       monitoring.enable = true;
@@ -46,6 +46,7 @@
       pocketid.enable = true;
       booklore.enable = true;
       ephemera.enable = true;
+      lidify.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
