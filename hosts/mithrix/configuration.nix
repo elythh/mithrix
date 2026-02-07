@@ -44,6 +44,22 @@
     };
   };
 
+    fileSystems."/mnt/storage" = {
+    device = "u542537@u542537.your-storagebox.de:/home";
+    fsType = "fuse.sshfs";
+    options = [
+      "port=23"
+      "identityfile=/home/gwen/.ssh/id_default"
+      "idmap=user"
+      "x-systemd.automount" # mount the filesystem automatically on first access
+      "allow_other" # don't restrict access to only the user which `mount`s it (because that's probably systemd who mounts it, not you)
+      "user" # allow manual `mount`ing, as ordinary user.
+      "_netdev"
+      "StrictHostKeyChecking=accept-new"
+    ];
+  };
+  boot.supportedFilesystems."fuse.sshfs" = true;
+
   services.comin = {
     enable = true;
     remotes = [{
