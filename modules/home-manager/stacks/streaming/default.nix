@@ -13,6 +13,7 @@
   bazarrName = "bazarr";
   lidarrName = "lidarr";
   prowlarrName = "prowlarr";
+  navidromName = "navidrome";
 
   cfg = config.meadow.stacks.${stackName};
   storage = "${config.meadow.stacks.storageBaseDir}/${stackName}";
@@ -211,7 +212,7 @@ in {
         image = "lscr.io/linuxserver/lidarr:nightly";
         volumes = [
           "${storage}/${lidarrName}:/config"
-          "${storage}/lidify/music:/music"
+          "${mediaStorage}:/data"
         ];
         environment = {
           PUID = config.meadow.stacks.defaultUid;
@@ -236,7 +237,7 @@ in {
         image = "docker.io/slskd/slskd:latest";
         volumes = [
           "${storage}/data:/app"
-          "${config.meadow.stacks.storageBaseDir}/lidify/music:/downloads"
+          "${mediaStorage}:/data"
         ];
         environment = {
           SLSKD_REMOTE_CONFIGURATION = "true";
@@ -259,7 +260,7 @@ in {
         image = "docker.io/mrusse08/soularr:latest";
         volumes = [
           "${storage}/soularr:/data"
-          "${config.meadow.stacks.storageBaseDir}/lidify/music:/downloads"
+          "${mediaStorage}/downloads:/downloads"
         ];
         environment = {
           TZ = config.meadow.stacks.defaultTz;
@@ -267,28 +268,48 @@ in {
         stack = stackName;
       };
 
-      flaresolverr = {
-        image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      navidrome = {
+        image = "docker.io/deluan/navidrome:latest";
         volumes = [
-          "${storage}/${prowlarrName}:/config"
+          "${storage}/navidrome:/data"
+          "${mediaStorage}/music:/music:ro"
         ];
-        environment = {
-          LOG_LEVEL = "info";
-          LOG_HTML = false;
-          CAPTCHA_SOLVER = "none";
-          TZ = config.meadow.stacks.defaultTz;
-        };
-
+        port = 4533;
         stack = stackName;
+        traefik.name = "navidrome";
+        environmentFile = [config.sops.secrets."navidrome/env".path];
         homepage = {
           category = "Media";
-          name = "Flaresolverr";
+          name = "Navidrome";
           settings = {
-            icon = "flaresolverr";
-            description = "Cloudflare Protection Bypass";
+            description = "Music livrary";
+            icon = "navidrome";
           };
         };
       };
+
+      # flaresolverr = {
+      #   image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      #   volumes = [
+      #     "${storage}/${prowlarrName}:/config"
+      #   ];
+      #   environment = {
+      #     LOG_LEVEL = "info";
+      #     LOG_HTML = false;
+      #     CAPTCHA_SOLVER = "none";
+      #     TZ = config.meadow.stacks.defaultTz;
+      #   };
+      #
+      #   stack = stackName;
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Flaresolverr";
+      #     settings = {
+      #       icon = "flaresolverr";
+      #       description = "Cloudflare Protection Bypass";
+      #     };
+      #   };
+      # };
     };
   };
 }

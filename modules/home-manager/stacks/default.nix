@@ -29,11 +29,11 @@ in {
     };
     externalStorageBaseDir = lib.mkOption {
       type = lib.types.str;
-      default = "/mnt/hdd1";
+      default = "/mnt";
     };
     mediaStorageBaseDir = lib.mkOption {
       type = lib.types.str;
-      default = "${cfg.externalStorageBaseDir}/media";
+      default = "${cfg.externalStorageBaseDir}/storage/media";
     };
   };
   config = lib.mkIf cfg.enable {

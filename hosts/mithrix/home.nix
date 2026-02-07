@@ -46,7 +46,7 @@
       pocketid.enable = true;
       booklore.enable = true;
       ephemera.enable = true;
-      lidify.enable = true;
+      # lidify.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";

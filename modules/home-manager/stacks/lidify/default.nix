@@ -6,6 +6,7 @@
   name = "lidify";
   cfg = config.meadow.stacks.${name};
   storage = "${config.meadow.stacks.storageBaseDir}/${name}";
+  mediaStorage = "${config.meadow.stacks.mediaStorageBaseDir}";
 in {
   options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
@@ -13,7 +14,7 @@ in {
     services.podman.containers.${name} = {
       image = "docker.io/chevron7locked/lidify:latest";
       volumes = [
-        "${storage}/music:/music"
+        "${mediaStorage}/music:/music"
         "${storage}/data:/data"
       ];
       traefik = {
