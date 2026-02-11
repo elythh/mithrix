@@ -47,6 +47,7 @@
       booklore.enable = true;
       ephemera.enable = true;
       # lidify.enable = true;
+      koito.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
