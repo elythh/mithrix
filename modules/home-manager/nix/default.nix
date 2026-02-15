@@ -1,7 +1,5 @@
 # This module is not enabled using an enable flag, because it contains essential settings, that should always be active.
 {
-  inputs,
-  outputs,
   lib,
   config,
   osConfig ? {},
@@ -10,14 +8,6 @@
 }: let
   isStandalone = !config.submoduleSupport.enable;
 in {
-  imports = [
-    inputs.nix-index-database.hmModules.nix-index
-    {
-      programs.nix-index-database.comma.enable = true;
-      programs.nix-index.enable = true;
-    }
-  ];
-
   nix = {
     package = lib.mkIf isStandalone pkgs.nix;
     gc.automatic = true;
