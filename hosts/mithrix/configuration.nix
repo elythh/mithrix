@@ -15,9 +15,7 @@
       configLocation = "~/nix-config#mithrix";
     };
     bootLoader.enable = true;
-    docker.enable = false;
     shells.enable = true;
-    murmur.enable = true;
     sops = {
       enable = true;
       extraSopsFiles = [../../secrets/mithrix/secrets.yaml];
@@ -44,7 +42,7 @@
     };
   };
 
-    fileSystems."/mnt/storage" = {
+  fileSystems."/mnt/storage" = {
     device = "u542537@u542537.your-storagebox.de:/home";
     fsType = "fuse.sshfs";
     options = [
@@ -68,9 +66,10 @@
       branches.main.name = "main";
     }];
   };
+
   services.prometheus.exporters.node = {
-      enable = true;
-      port = 9191;
-      enabledCollectors = [ "systemd" ];
+    enable = true;
+    port = 9191;
+    enabledCollectors = [ "systemd" ];
   };
 }

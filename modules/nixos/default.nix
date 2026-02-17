@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   ...
 }: {
   # This module will import all submodules (the default.nix in each subfolder).
