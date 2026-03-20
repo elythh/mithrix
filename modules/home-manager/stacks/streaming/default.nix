@@ -142,6 +142,42 @@ in {
           PATH="/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
         };
       };
+
+      jellyfin = {
+        image = "docker.io/jellyfin/jellyfin";
+        volumes = [
+          "${mediaStorage}/music:/media"
+          "${storage}/jellyfin:/config"
+        ];
+        port = 8096;
+        traefik.name = "jellyfin";
+        stack = stackName;
+      };
+
+      # redis-allstarr = {
+      #   image = "docker.io/redis:7-alpine";
+      #   volumes = [
+      #     "${storage}/allstarr/redis:/data"
+      #   ];
+      #   stack = stackName;
+      # };
+      #
+      # allstarrr = {
+      #   image = "ghcr.io/sopat712/allstarr:latest";
+      #   port = 8080;
+      #   traefik.name = "allstarr";
+      #   volumes = [
+      #     "${mediaStorage}/downloads:/app/downloads"
+      #     "/home/gwen/.config/sops-nix/secrets/allstarr/env:/app/.env"
+      #   ];
+      #   environmentFile = [config.sops.secrets."allstarr/env".path];
+      #   environment = {
+      #     Redis__ConnectionString = "redis-allstarr:6379";
+      #     Redis__Enabled = "true";
+      #   };
+      #   stack = stackName;
+      #
+      # };
     };
   };
 }
