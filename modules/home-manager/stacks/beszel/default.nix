@@ -26,6 +26,7 @@ in {
       ];
       environment = {
         LISTEN = "45876";
+        LOG_LEVEL = "debug";
       };
       environmentFile = [config.sops.secrets."beszel/env".path];
       stack = name;
