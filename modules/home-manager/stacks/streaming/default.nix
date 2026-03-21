@@ -70,28 +70,28 @@ in {
         };
       };
 
-      soulseek = {
-        image = "docker.io/slskd/slskd:latest";
-        volumes = [
-          "${storage}/slskd/data:/app"
-          "${mediaStorage}:/data"
-        ];
-        environment = {
-          SLSKD_REMOTE_CONFIGURATION = "true";
-        };
-
-        port = 5030;
-        stack = stackName;
-        traefik.name = "soulseek";
-        homepage = {
-          category = "Media";
-          name = "Soulseek";
-          settings = {
-            description = "Music downloader";
-            icon = "Soulseek";
-          };
-        };
-      };
+      # soulseek = {
+      #   image = "docker.io/slskd/slskd:latest";
+      #   volumes = [
+      #     "${storage}/slskd/data:/app"
+      #     "${mediaStorage}:/data"
+      #   ];
+      #   environment = {
+      #     SLSKD_REMOTE_CONFIGURATION = "true";
+      #   };
+      #
+      #   port = 5030;
+      #   stack = stackName;
+      #   traefik.name = "soulseek";
+      #   homepage = {
+      #     category = "Media";
+      #     name = "Soulseek";
+      #     settings = {
+      #       description = "Music downloader";
+      #       icon = "Soulseek";
+      #     };
+      #   };
+      # };
 
       soularr = {
         image = "docker.io/mrusse08/soularr:latest";
