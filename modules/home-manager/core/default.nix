@@ -22,6 +22,7 @@ in {
       jq
       yq-go
       vlc
+      tmux
     ];
 
     home.shellAliases.uh = lib.mkIf (cfg.configLocation != null) "home-manager switch -b bak --flake ${cfg.configLocation}";
