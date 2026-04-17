@@ -48,6 +48,7 @@
       ephemera.enable = true;
       # lidify.enable = true;
       koito.enable = true;
+      twitch.enable = true;
       traefik = {
           enable = true;
           domain = "elyth.xyz";
