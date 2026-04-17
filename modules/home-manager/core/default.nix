@@ -23,7 +23,7 @@ in {
       yq-go
       vlc
       tmux
-    ];
+    ] ++ [inputs.nvim.packages.${pkgs.system}.default];
 
     home.shellAliases.uh = lib.mkIf (cfg.configLocation != null) "home-manager switch -b bak --flake ${cfg.configLocation}";
   };
