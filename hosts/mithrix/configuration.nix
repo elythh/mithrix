@@ -60,6 +60,8 @@
 
   services.comin = {
     enable = true;
+    hostname = "mithrix";
+    debug = true;
     remotes = [{
       name = "origin";
       url = "https://github.com/elythh/mithrix";
