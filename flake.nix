@@ -61,7 +61,12 @@
           ++ lib.lists.optionals (userConfigs != null) [
             home-manager.nixosModules.home-manager
             {
-              home-manager.sharedModules = [./modules/home-manager ./hosts/shared/home.nix];
+              home-manager.sharedModules = [
+                ./modules/home-manager
+                ./modules/shared
+                ./hosts/shared/shared.nix
+                ./hosts/shared/home.nix
+              ];
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {inherit inputs outputs lib;};
@@ -70,29 +75,14 @@
           ];
       };
 
-    mkHome = {
-      system ? "x86_64-linux",
-      cfgPath,
-      lib ? mkLib hmPackages.${system},
-    }:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = hmPackages.${system};
-        extraSpecialArgs = {inherit inputs outputs lib;};
-        modules = [
-          ./modules/home-manager
-          ./modules/shared
-          ./hosts/shared/shared.nix
-          ./hosts/shared/home.nix
-          cfgPath
-        ];
-      };
   in {
     nixosConfigurations = {
-      mithrix = mkSystem {systemConfig = ./hosts/mithrix/configuration.nix;};
-    };
-
-    homeConfigurations = {
-      gwen = mkHome {cfgPath = ./hosts/mithrix/home.nix;};
+      mithrix = mkSystem {
+        systemConfig = ./hosts/mithrix/configuration.nix;
+        userConfigs = {
+          gwen = ./hosts/mithrix/home.nix;
+        };
+      };
     };
 
     devShells = forAllSystems (system: import ./shell.nix {pkgs = nixpkgs.legacyPackages.${system};});
