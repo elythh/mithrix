@@ -64,6 +64,7 @@
       name = "origin";
       url = "https://github.com/elythh/mithrix";
       branches.main.name = "main";
+      poller.period = 45;
     }];
   };
 
