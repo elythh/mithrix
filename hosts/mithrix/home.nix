@@ -47,12 +47,21 @@
       booklore.enable = true;
       ephemera.enable = true;
       # lidify.enable = true;
-      koito.enable = true;
-      twitch.enable = true;
-      traefik = {
-          enable = true;
-          domain = "elyth.xyz";
-        };
+       koito.enable = true;
+       twitch.enable = true;
+       softserve = {
+         enable = true;
+         initialAdminPublicKeyFile = "${config.home.homeDirectory}/.ssh/id_default.pub";
+         repos = {
+           flake = "https://github.com/elythh/flake.git";
+           nvim = "https://github.com/elythh/nvim.git";
+           mithrix = "https://github.com/elythh/mithrix.git";
+         };
+       };
+       traefik = {
+           enable = true;
+           domain = "elyth.xyz";
+         };
     };
   };
 }
