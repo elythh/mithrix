@@ -48,7 +48,7 @@
       ephemera.enable = true;
       # lidify.enable = true;
        koito.enable = true;
-       twitch.enable = true;
+       twitch.enable = false;
        softserve = {
          enable = true;
          displayName = "Elyth's Git";
