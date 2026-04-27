@@ -51,6 +51,8 @@
        twitch.enable = true;
        softserve = {
          enable = true;
+         displayName = "git.elyth.xyz";
+         sshPublicUrl = "ssh://git.elyth.xyz";
          initialAdminPublicKeyFile = "${config.home.homeDirectory}/.ssh/id_default.pub";
          repos = {
            flake = "https://github.com/elythh/flake.git";
