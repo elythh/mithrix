@@ -51,7 +51,7 @@
        twitch.enable = true;
        softserve = {
          enable = true;
-         displayName = "git.elyth.xyz";
+         displayName = "Elyth's Git";
          sshPublicUrl = "ssh://git.elyth.xyz";
          initialAdminPublicKeyFile = "${config.home.homeDirectory}/.ssh/id_default.pub";
          repos = {
