@@ -65,7 +65,7 @@ in {
         };
       stack = containerName;
       homepage = {
-        category = "Utilities";
+        category = "Development";
         name = "Soft Serve";
         settings = {
           description = "Self-hosted Git over SSH";

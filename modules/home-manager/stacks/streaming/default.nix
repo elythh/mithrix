@@ -65,7 +65,7 @@ in {
           name = "Lidarr";
           settings = {
             description = "Music manager";
-            icon = "Lidarr";
+            icon = "lidarr";
           };
         };
       };
@@ -123,7 +123,7 @@ in {
           category = "Media";
           name = "Navidrome";
           settings = {
-            description = "Music livrary";
+            description = "Music library";
             icon = "navidrome";
           };
         };

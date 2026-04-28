@@ -16,10 +16,10 @@ in {
       port = 3000;
       traefik.name = "notes";
       homepage = {
-        category = "Media";
-        name = "silverbullet";
+        category = "Utilities";
+        name = "Silverbullet";
         settings = {
-          description = "Note taking markdown editor";
+          description = "Markdown note editor";
           icon = "silverbullet";
         };
       };

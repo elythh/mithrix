@@ -17,11 +17,11 @@ in {
       #   "${storage}/data:/home/nonroot"
       # ];
       homepage = {
-        category = "Utilities";
-        name = "golink";
+        category = "Infrastructure";
+        name = "GoLink";
         settings = {
-          description = "Tailscale linker";
-          icon = "stremio";
+          description = "Tailscale short links";
+          icon = "wireguard";
         };
       };
     };

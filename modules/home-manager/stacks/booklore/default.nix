@@ -25,10 +25,10 @@ in {
       dependsOn = [ "mariadb"];
       homepage = {
         category = "Media";
-        name = "booklore";
+        name = "BookLore";
         settings = {
-          description = "Book Libary";
-          icon = "booklore";
+          description = "Book library";
+          icon = "calibre-web";
         };
       };
       traefik = {

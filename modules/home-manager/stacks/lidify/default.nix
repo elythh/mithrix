@@ -24,7 +24,7 @@ in {
       port = 3030;
       homepage = {
         category = "Media";
-        name = "spotify";
+        name = "Lidify";
         settings = {
           description = "Spotify Alternative";
           icon = "lidify";

@@ -68,7 +68,7 @@ in {
       network = [cfg.network];
       alloy.enable = true;
       homepage = {
-        category = "General";
+        category = "Infrastructure";
         name = "Traefik";
         settings = {
           description = "Reverse Proxy";

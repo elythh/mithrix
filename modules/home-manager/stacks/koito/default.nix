@@ -33,11 +33,11 @@ in {
         port = 4110;
         stack = name;
         homepage = {
-          category = "Utilities";
-          name = "koito";
+          category = "Media";
+          name = "Koito";
           settings = {
-            description = "Tailscale linker";
-            icon = "stremio";
+            description = "ListenBrainz relay and music companion";
+            icon = "navidrome";
           };
         };
       };

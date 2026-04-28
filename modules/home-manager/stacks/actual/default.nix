@@ -19,8 +19,8 @@ in {
         category = "Utilities";
         name = "Actual";
         settings = {
-          description = "Budget Manager";
-          icon = "Actual";
+          description = "Budget manager";
+          icon = "actual-budget";
         };
       };
     };

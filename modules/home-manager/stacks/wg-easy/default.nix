@@ -35,7 +35,7 @@ in {
         subDomain = "wg";
       };
       homepage = {
-        category = "General";
+        category = "Infrastructure";
         name = "Wireguard";
         settings = {
           description = "VPN Server";

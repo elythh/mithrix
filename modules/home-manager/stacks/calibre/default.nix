@@ -27,10 +27,10 @@ in {
       stack = name;
       traefik.name = name;
       homepage = {
-        category = "General";
+        category = "Media";
         name = "Calibre";
         settings = {
-          description = "Ebook Library";
+          description = "E-book library";
           icon = "calibre-web";
         };
       };
@@ -56,10 +56,10 @@ in {
       stack = name;
       traefik.name = "calibre-downloader";
       homepage = {
-        category = "General";
+        category = "Media";
         name = "Calibre Downloader";
         settings = {
-          description = "Ebook Library";
+          description = "E-book downloader";
           icon = "calibre-web";
         };
       };

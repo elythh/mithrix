@@ -26,10 +26,10 @@ in {
       environmentFile = [config.sops.secrets."ephemera/env".path];
       homepage = {
         category = "Media";
-        name = "ephemera";
+        name = "Ephemera";
         settings = {
           description = "Book Downloader";
-          icon = "ephemera";
+          icon = "calibre-web";
         };
       };
       stack = name;
