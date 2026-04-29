@@ -20,11 +20,6 @@ in {
       default = null;
       description = "Public SSH URL shown in clone/push commands (e.g. ssh://git.example.com).";
     };
-    repos = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
-      default = {};
-      description = "Repositories to mirror into Soft Serve (name = clone URL).";
-    };
     initialAdminPublicKey = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
@@ -34,11 +29,6 @@ in {
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "Path to SSH public key file for Soft Serve first-run admin bootstrap.";
-    };
-    syncInterval = lib.mkOption {
-      type = lib.types.str;
-      default = "30m";
-      description = "How often to sync public GitHub repositories into Soft Serve.";
     };
   };
 
