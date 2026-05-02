@@ -7,9 +7,27 @@
   cfg = config.meadow.stacks.${name};
   storage = "${config.meadow.stacks.storageBaseDir}/${name}";
 in {
-  options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
+  options.meadow.stacks.${name} = {
+    enable = lib.mkEnableOption name;
+
+    multiScrobbler = {
+      enable = lib.mkEnableOption "foxxmd/multi-scrobbler bridge from Last.fm to Koito";
+      envSecret = lib.mkOption {
+        type = lib.types.str;
+        default = "multi-scrobbler/env";
+        description = "SOPS secret key containing Multi-Scrobbler environment variables.";
+      };
+    };
+  };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = (!cfg.multiScrobbler.enable) || builtins.hasAttr cfg.multiScrobbler.envSecret config.sops.secrets;
+        message = "meadow.stacks.koito.multiScrobbler.envSecret must exist in sops.secrets.";
+      }
+    ];
+
     services.podman.containers = {
       ${name} = {
         image = "docker.io/gabehf/koito:latest";
@@ -51,6 +69,31 @@ in {
           POSTGRES_DB = "koitodb";
           POSTGRES_USER= "postgres";
           POSTGRES_PASSWORD= "secret_password";
+        };
+      };
+      multi-scrobbler = lib.mkIf cfg.multiScrobbler.enable {
+        image = "docker.io/foxxmd/multi-scrobbler:latest";
+        stack = name;
+        dependsOn = [name];
+        volumes = [
+          "${storage}/multi-scrobbler/config:/config"
+        ];
+        port = 9078;
+        traefik.name = "scrobbler";
+        environmentFile = [config.sops.secrets.${cfg.multiScrobbler.envSecret}.path];
+        environment = {
+          TZ = config.meadow.stacks.defaultTz;
+          BASE_URL = "https://scrobbler.${config.meadow.stacks.traefik.domain}";
+          SOURCE_LASTFM_REDIRECT_URI = "https://scrobbler.${config.meadow.stacks.traefik.domain}/lastfm/callback";
+          KOITO_URL = "https://koito.${config.meadow.stacks.traefik.domain}";
+        };
+        homepage = {
+          category = "Media";
+          name = "Multi-Scrobbler";
+          settings = {
+            description = "Bridge scrobbles from Last.fm to Koito";
+            icon = "lastfm";
+          };
         };
       };
     };

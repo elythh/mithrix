@@ -47,23 +47,23 @@
       booklore.enable = true;
       ephemera.enable = true;
       # lidify.enable = true;
-       koito.enable = true;
-       twitch.enable = false;
-       softserve = {
-         enable = true;
-         displayName = "Elyth's Git";
-         sshPublicUrl = "ssh://git.elyth.xyz";
-         initialAdminPublicKeyFile = "${config.home.homeDirectory}/.ssh/id_default.pub";
-         repos = {
-           flake = "https://github.com/elythh/flake.git";
-           nvim = "https://github.com/elythh/nvim.git";
-           mithrix = "https://github.com/elythh/mithrix.git";
-         };
-       };
-       traefik = {
-           enable = true;
-           domain = "elyth.xyz";
-         };
+      koito = {
+        enable = true;
+        multiScrobbler = {
+          enable = true;
+        };
+      };
+      twitch.enable = false;
+      softserve = {
+        enable = true;
+        displayName = "Elyth's Git";
+        sshPublicUrl = "ssh://git.elyth.xyz";
+        initialAdminPublicKeyFile = "${config.home.homeDirectory}/.ssh/id_default.pub";
+      };
+      traefik = {
+          enable = true;
+          domain = "elyth.xyz";
+      };
     };
   };
 }
