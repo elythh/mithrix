@@ -6,6 +6,7 @@
   name = "grimmory";
   cfg = config.meadow.stacks.${name};
   storage = "${config.meadow.stacks.storageBaseDir}/${name}";
+  mediaStorage = "${config.meadow.stacks.mediaStorageBaseDir}";
 in {
   options.meadow.stacks.${name}.enable = lib.mkEnableOption name;
 
@@ -19,6 +20,7 @@ in {
           "${storage}/books:/books:rw"
           "${storage}/data:/app/data"
           "${storage}/bookdrop:/bookdrop"
+          "${mediaStorage}/books:/mnt/books"
         ];
 
         dependsOn = ["mariadb"];
