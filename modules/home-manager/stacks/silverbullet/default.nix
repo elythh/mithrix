@@ -11,7 +11,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.podman.containers.${name} = {
-      image = "ghcr.io/silverbulletmd/silverbullet:v2";
+      image = "ghcr.io/silverbulletmd/silverbullet:2.7.0";
       volumes = ["${storage}/space:/space"];
       port = 3000;
       traefik.name = "notes";
