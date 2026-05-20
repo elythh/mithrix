@@ -12,24 +12,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - hostName: Desktop
-            nixosCfgKey: desktop
-            homeCfgKey: desktop
-            os-label: ubuntu-latest
-
-          - hostName: WSL2
-            nixosCfgKey: wsl2
-            homeCfgKey: wsl2
-            os-label: ubuntu-latest
-
-          - hostName: Thinkpad
-            nixosCfgKey: thinkpad
-            homeCfgKey: thinkpad
-            os-label: ubuntu-latest
-
-          - hostName: Homeserver
-            nixosCfgKey: homeserver
-            homeCfgKey: homeserver
+          - hostName: Mithrix
+            nixosCfgKey: mithrix
             os-label: ubuntu-latest
 
       fail-fast: false
@@ -64,10 +48,6 @@ jobs:
       - name: Build NixOS Configuration
         if: ${{ contains(toJSON(matrix), 'nixosCfgKey') && matrix.nixosCfgKey != '' }}
         run: nix build .#nixosConfigurations.${{ matrix.nixosCfgKey }}.config.system.build.toplevel
-
-      - name: Build Home-Manager Cofiguration
-        if: ${{ contains(toJSON(matrix), 'homeCfgKey') && matrix.homeCfgKey != '' }}
-        run: nix build .#homeConfigurations.${{ matrix.homeCfgKey }}.activationPackage
 
   check_flake:
     runs-on: ubuntu-24.04
