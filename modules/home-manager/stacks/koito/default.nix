@@ -35,14 +35,21 @@ in {
         volumes = [
           "${storage}/koito/data:/etc/koito"
         ];
-          environment = {
-            # KOITO_DATABASE_URL="postgres://postgres:secret_password@pg:5432/koitodb";
-            KOITO_ALLOWED_HOSTS="koito.elyth.xyz,192.168.0.100:4110";
-            # KOITO_SUBSONIC_URL="https://navidrome.elyth.xyz";
-            # KOITO_SUBSONIC_PARAMS="u=elyth&t=4763f6aaeb37fbf45a208337220ec16b&s=081120";
-            KOITO_ENABLE_LBZ_RELAY="true";
-            KOITO_LBZ_RELAY_URL="https://api.listenbrainz.org/1";
-            KOITO_LBZ_RELAY_TOKEN="7c52576c-74f4-4726-96b1-a9a169a2f35e";
+        environmentFile = [config.sops.secrets."koito/env".path];
+        environment =
+          {
+            KOITO_ENABLE_LBZ_RELAY = "true";
+            KOITO_LBZ_RELAY_URL = "https://api.listenbrainz.org/1";
+            KOITO_LBZ_RELAY_TOKEN = "7c52576c-74f4-4726-96b1-a9a169a2f35e";
+
+            # Ensure the canonical endpoint is used even if a stale value exists in env file.
+            KOITO_MUSICBRAINZ_URL = "https://musicbrainz.org";
+            KOITO_FETCH_IMAGES_DURING_IMPORT = "true";
+
+            KOITO_LOG_LEVEL="debug";
+          }
+          // lib.optionalAttrs (builtins.hasAttr "lastfm/api_key" config.sops.secrets) {
+            KOITO_LASTFM_API_KEY_FILE = config.sops.secrets."lastfm/api_key".path;
           };
         traefik = {
           name = name;

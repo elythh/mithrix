@@ -32,7 +32,7 @@
       homepage.enable = true;
       beszel.enable = true;
       # wg-easy.enable = true;
-      # dozzle.enable = true;
+      dozzle.enable = true;
       audiobookshelf.enable = true;
       # streaming.enable = true;
       aiostreams.enable = true;
