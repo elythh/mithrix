@@ -43,6 +43,7 @@
       silverbullet.enable = true;
       golink.enable = true;
       glance.enable = true;
+      changedetection.enable = true;
       pocketid.enable = true;
       grimmory.enable = true;
       ephemera.enable = true;
