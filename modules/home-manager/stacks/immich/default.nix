@@ -19,6 +19,7 @@
     DB_USERNAME = "postgres";
     DB_PASSWORD = "1234";
     DB_DATABASE_NAME = "immich";
+    DB_VECTOR_EXTENSION = "vectorchord";
     REDIS_HOSTNAME = redisName;
     NODE_ENV = "production";
   };
@@ -61,13 +62,14 @@ in {
       };
 
       ${dbName} = {
-        image = "docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0";
+        image = "ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0";
         volumes = ["${storage}/pgdata:/var/lib/postgresql/data"];
 
         environment = {
           POSTGRES_USER = env.DB_USERNAME;
           POSTGRES_PASSWORD = env.DB_PASSWORD;
           POSTGRES_DB = env.DB_DATABASE_NAME;
+          DB_STORAGE_TYPE = "HDD";
         };
 
         stack = name;
