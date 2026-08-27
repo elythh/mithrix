@@ -39,6 +39,7 @@
       # free-game.enable = true;
       monitoring.enable = true;
       # minecraft.enable = true;
+      palworld.enable = true;
       # copyparty.enable = true;
       silverbullet.enable = true;
       golink.enable = true;
