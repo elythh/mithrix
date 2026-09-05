@@ -40,6 +40,7 @@
       monitoring.enable = true;
       # minecraft.enable = true;
       palworld.enable = true;
+      mc-hardcore.enable = true;
       # copyparty.enable = true;
       silverbullet.enable = true;
       golink.enable = true;
