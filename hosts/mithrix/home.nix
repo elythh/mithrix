@@ -39,15 +39,16 @@
       # free-game.enable = true;
       monitoring.enable = true;
       # minecraft.enable = true;
-      palworld.enable = true;
-      mc-hardcore.enable = true;
+      # palworld.enable = true;
+      # mc-hardcore.enable = true;
       # copyparty.enable = true;
       silverbullet.enable = true;
-      golink.enable = true;
+      # golink.enable = true;
       glance.enable = true;
       changedetection.enable = true;
       pocketid.enable = true;
       grimmory.enable = true;
+      # bookorbit.enable = true;
       ephemera.enable = true;
       # lidify.enable = true;
       koito = {
@@ -56,7 +57,7 @@
           enable = true;
         };
       };
-      twitch.enable = false;
+      # twitch.enable = false;
       softserve = {
         enable = true;
         displayName = "Elyth's Git";
