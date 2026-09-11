@@ -48,8 +48,7 @@
       changedetection.enable = true;
       pocketid.enable = true;
       grimmory.enable = true;
-      # bookorbit.enable = true;
-      ephemera.enable = true;
+      bookorbit.enable = true;
       # lidify.enable = true;
       koito = {
         enable = true;
