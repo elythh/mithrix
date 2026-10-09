@@ -6,4 +6,7 @@ name: middlewares: let
   };
 
   validMiddlewares = builtins.filter (key: mapping ? ${key}) middlewares;
-in {"traefik.http.routers.${name}.middlewares" = builtins.concatStringsSep "," (map (key: mapping.${key}) validMiddlewares);}
+in
+  if validMiddlewares == []
+  then {}
+  else {"traefik.http.routers.${name}.middlewares" = builtins.concatStringsSep "," (map (key: mapping.${key}) validMiddlewares);}
